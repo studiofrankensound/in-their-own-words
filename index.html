@@ -144,6 +144,8 @@ mark.hl{background:#FCE87A;color:inherit;padding:0 1px;border-radius:2px}
   color:var(--flag);margin-top:8px;padding-left:9px;border-left:2px solid var(--flag);
 }
 .drawer p.flag{font-size:13.5px;margin:0 0 22px}
+.cell p.flag.tp,.drawer p.flag.tp{color:#8A5A00;border-left-color:#C9922A}
+.cell p.flag.tp::before,.drawer p.flag.tp::before{content:'Found, not party-sourced \u2014 not used: ';font-weight:600}
 .track{display:flex;gap:2px;align-items:center}
 .track i{display:block;width:11px;height:4px;background:var(--rule)}
 .track i.on{height:8px}
@@ -282,7 +284,6 @@ mark.hl{background:#FCE87A;color:inherit;padding:0 1px;border-radius:2px}
   .viewtabs button{padding:7px 9px;font-size:13px}
   #domainchips{flex-wrap:wrap}
   #partychips{flex-wrap:wrap}
-  .count{display:none}
 
   /* ---- matrix: collapse the party-per-column grid into one card
          per topic, with each party's own block labelled and
@@ -468,7 +469,7 @@ const TOPICS = [
     alp:{v:1,  t:'Change investor tax breaks so first home buyers stop losing at auction, while keeping negative gearing for newly built homes and grandfathering existing arrangements. Five per cent deposits for first home buyers.', s:A+'our-policies/a-fair-go-at-your-own-home/'},
     lib:{v:-2, t:'Axe the negative gearing changes, described as a housing tax, and reserve the five per cent deposit scheme for Australian citizens.', s:L+'our-plan/tax'},
     onp:{v:0,  t:'Would stop property sales to non-residents and non-citizens on housing-shortage grounds. Negative gearing is not addressed on these pages.', s:O+'foreign-ownership'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -487,7 +488,7 @@ const TOPICS = [
   axis:['Lower the intake','Maintain or grow the intake'],
   p:{
     grn:{v:2,  t:'Says Australian society benefits from immigration, and that the country has humanitarian and legal obligations to accept refugees and reunite families under international law and the Refugee Convention.', s:G+'policies/immigration-and-refugees'},
-    alp:{v:null,t:'Not covered on the pages read so far.', n:'Searched Labor\u2019s news releases as well as the plan pages. Nothing published \u2014 the party has not settled a public position, so the gap is real rather than unread.', s:A+'our-plan/what-were-working-on/'},
+    alp:{v:null,t:'Checked — not addressed on the pages read.', n:'Searched Labor\u2019s news releases as well as the plan pages. Nothing published \u2014 the party has not settled a public position, so the gap is real rather than unread.', s:A+'our-plan/what-were-working-on/'},
     lib:{v:-2, t:'Cap net overseas migration each year below the number of homes completed, and overhaul skilled migration to bring in the trades businesses need.', s:L+'our-plan/migration'},
     onp:{v:-2, t:'Says the population has surged past 27 million, overwhelming housing, infrastructure and services while wages stagnate. Would cap visas at 130,000 a year, a cut of more than 570,000 from current levels, deport 75,000 people it says are here unlawfully, and end student visa loopholes.', s:O+'immigration'},
     nat:{v:-2,  t:'Wants migration brought back to sustainable levels and linked to how many homes are actually built, citing 1.6 million people brought in over four years without matching housing and hospitals, and would end what it calls abuse of the student visa loophole.', s:NAT+'nationals-policies/cutting-immigration/'}
@@ -498,7 +499,7 @@ const TOPICS = [
   axis:['Enforcement first','Rights of arrivals first'],
   p:{
     grn:{v:2,  t:'Would end offshore detention and bring everyone still in Nauru or PNG to Australia, cap immigration detention at 7 days, launch a Royal Commission into the detention regime, and repeal Labor\u2019s travel-ban, deportation and phone-ban laws.', s:G+'portfolios/immigration'},
-    alp:{v:null,t:'Not covered on the pages read so far.', n:'Same search as the migration row. The humanitarian intake number is being reworked and has not been announced by the party.', s:A+'our-plan/what-were-working-on/'},
+    alp:{v:null,t:'Checked — not addressed on the pages read.', n:'Same search as the migration row. The humanitarian intake number is being reworked and has not been announced by the party.', s:A+'our-plan/what-were-working-on/'},
     lib:{v:-2, t:'Make the Australian Values Statement a binding visa condition, introduce a Safe Country List to fast-track refusal of unfounded claims, restore temporary protection visas, fund deportations, and vet visa applicants including their social media.', s:L+'our-plan/migration'},
     onp:{v:-2, t:'Would reintroduce Temporary Protection Visas, withdraw Australia from the UN Refugee Convention, refuse entry to migrants from nations it says foster extremist ideologies, deport any visa holder who breaks the law, and introduce an eight-year wait for citizenship and welfare access.', s:O+'immigration'},
     nat:{v:-2,  t:'Would make Australian values a binding condition on every visa, refuse entry to extremists and radicals with tougher vetting, and deport people who overstay illegally or breach visa conditions.', s:NAT+'nationals-policies/cutting-immigration/'}
@@ -523,7 +524,7 @@ const TOPICS = [
     alp:{v:2,  t:'Free TAFE made permanent, student debt cut by 20 per cent, paid placements for student teachers, nurses, midwives and social workers, every school fully funded, and $10,000 for construction apprentices.', s:A+'our-policies/building-australias-future/'},
     lib:{v:-1, t:'Get the basics right — reading, writing, maths and attendance — be honest about how children are performing, and back trades and training rather than treating university as the default.', s:L+'our-plan'},
     onp:{v:-1, t:'Says outcomes trail comparable countries despite a $24.8 billion budget, and would restore critical thinking and what it calls the cornerstones of education.', s:O+'education'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -545,7 +546,7 @@ const TOPICS = [
     alp:{v:2,  t:'Says the minimum wage has risen by more than $9,000 a year since 2022, backs another real rise, and is scrapping junior pay rates in retail, fast food and pharmacy.', s:A+'our-policies/help-with-the-cost-of-living/'},
     lib:{v:-2, t:'Says workplace regulators are hurting productivity, and would oblige regulators by law to encourage competition, investment and job creation. Has introduced legislation to expel the worst offenders from the CFMEU.', s:L+'our-plan/tax'},
     onp:{v:0,  t:'Backs jobs for Australians first and would expand the national apprenticeship scheme, with wage subsidies of 75% in the first year, 50% in the second and 25% in the third.', s:O+'jobs'},
-    nat:{v:null,t:'Not covered on the pages read so far.', n:'The clearest published stance on unions is narrow \u2014 removing CFMEU influence from Commonwealth-funded infrastructure projects, citing union-related costs inflating delivery by up to 30%. That\u2019s a real position, but it doesn\u2019t speak to general wages, junior rates or bargaining policy the way this topic tracks.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'The clearest published stance on unions is narrow \u2014 removing CFMEU influence from Commonwealth-funded infrastructure projects, citing union-related costs inflating delivery by up to 30%. That\u2019s a real position, but it doesn\u2019t speak to general wages, junior rates or bargaining policy the way this topic tracks.', s:NAT}
   }
 },
 {
@@ -556,7 +557,7 @@ const TOPICS = [
     alp:{v:1,  t:'Continues large public investment while saying the 2026 Budget has lower deficits and less debt, the economy is growing and unemployment is low.', s:A+'our-policies/building-australias-future/'},
     lib:{v:-2, t:'A speed limit stopping government spending growing faster than the economy, a restored tax-to-GDP cap, a revitalised Charter of Budget Honesty, and a Future Generations Fund banking 80 cents of every dollar of unexpected resource windfall to pay down debt, with a quarter of its infrastructure flows going to the regions.', s:L+'our-plan/australians'},
     onp:{v:-2, t:'A $90 billion budget savings plan cutting departments, reforming the NDIS, withdrawing from costly international agreements and removing duplication.', s:O+'slash-waste'},
-    nat:{v:null,t:'Not covered on the pages read so far.', n:'All 20 of the site\u2019s policy pages have now been checked; none addresses this specifically.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 of the site\u2019s policy pages have now been checked; none addresses this specifically.', s:NAT}
   }
 },
 {
@@ -576,9 +577,9 @@ const TOPICS = [
   p:{
     grn:{v:2,  t:'Says First Nations people never ceded sovereignty. Wants a National Truth and Justice Commission, reform of the Native Title Act around free, prior and informed consent, a federal Act protecting cultural heritage, and full implementation of UNDRIP into federal law.', s:G+'portfolios/first-nations'},
     alp:{v:-1, t:'A 12 Feb 2026 release announced further Closing the Gap funding \u2014 doubling remote jobs places, expanding food-security subsidies, $218m for a family-violence plan, and more health funding \u2014 delivered in partnership with the Coalition of Peaks. Framed entirely around service delivery; no Treaty, Makarrata Commission or constitutional proposal was found.', s:'https://www.alp.org.au/news/new-investments-build-on-progress-in-closing-the-gap'},
-    lib:{v:null,t:'Not covered on the pages read so far.', n:'Searched liberal.org.au\u2019s news section directly for an Indigenous affairs statement. Nothing from the party\u2019s own site came up \u2014 only third-party analysis and government (not party) pages.', s:L+'our-plan'},
+    lib:{v:null,t:'Checked — not addressed on the pages read.', n:'Searched liberal.org.au\u2019s news section directly for an Indigenous affairs statement. Nothing from the party\u2019s own site came up \u2014 only third-party analysis and government (not party) pages.', s:L+'our-plan'},
     onp:{v:-2, t:'Two March 2025 releases: would abolish the National Indigenous Australians Agency and audit all Indigenous grant spending, and would end native title and cultural heritage land claims, calling for a race-blind system with no separate recognition or funding.', s:'https://www.onenation.org.au/audit-indigenous-spending-to-close-the-gaps'},
-    nat:{v:null,t:'Not covered on the pages read so far.', n:'The only nationals.org.au statement found is from November 2022, opposing the Voice to Parliament before the 2023 referendum that decided it. Since that referendum failed and the Voice no longer exists as a live proposal, using a pre-referendum statement as the party\u2019s current position would be misleading, so it\u2019s left uncovered rather than used.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'The only nationals.org.au statement found is from November 2022, opposing the Voice to Parliament before the 2023 referendum that decided it. Since that referendum failed and the Voice no longer exists as a live proposal, using a pre-referendum statement as the party\u2019s current position would be misleading, so it\u2019s left uncovered rather than used.', s:NAT}
   }
 },
 {
@@ -589,7 +590,7 @@ const TOPICS = [
     alp:{v:-1, t:'Record defence investment alongside trade-building, with free trade agreements secured with the EU and UK and Australian produce returned to China. Says one in four jobs depends on trade.', s:A+'our-policies/building-australias-future/'},
     lib:{v:-2, t:'Build a defence force that can act fast and hit hard, deliver AUKUS, guard the borders, and keep streets safe from crime, terror and foreign threats. Commits to a whole-of-nation National Security Strategy with a dedicated adviser, and at least 3 per cent of GDP on defence.', s:L+'our-plan/australians'},
     onp:{v:null,t:'No standalone defence or foreign policy on these pages, though the savings plan includes withdrawing from costly international agreements.', s:O+'slash-waste'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -600,7 +601,7 @@ const TOPICS = [
     alp:{v:1,  t:'Delivered the National Anti-Corruption Commission, filling what it says was a gap at the federal level, alongside other integrity reforms.', s:A+'our-policies/building-australias-future/'},
     lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
     onp:{v:2,  t:'Introduce Citizen Initiated Referenda so voters can put forward legislation or a referendum question without waiting for politicians.', s:O+'citizen-initiated-referenda'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -611,7 +612,7 @@ const TOPICS = [
     alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
     lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
     onp:{v:2,  t:'Enshrine free speech in the Constitution through a referendum, and oppose censorship, speech regulation and what it calls bureaucratic silencing.', s:O+'free-speech-policy'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -621,8 +622,8 @@ const TOPICS = [
     grn:{v:2,  t:'Would raise all income support payments above the poverty line, lower the pension age from 67 to 65, and lower JobSeeker eligibility from 22 to 18, giving an extra 200,000 young people access to support.', s:G+'portfolios/social-services'},
     alp:{v:1, t:'Says it has expanded the single parenting payment, and is fighting NDIS fraud so more of the scheme\u2019s funding reaches people with disability. No broader statement on JobSeeker or the pension was found on the pages read.', s:'https://alp.org.au/our-plan/albanese-labor-government-achievements'},
     lib:{v:-2, t:'Reward those who work and try, and let people earn more before payments taper, on the view that work is the best way out of hardship. Would also reserve future access to 17 welfare programs and the NDIS to Australian citizens only.', s:L+'our-plan/australians'},
-    onp:{v:null,t:'Not covered on the pages read so far.', n:'This cell previously cited the /rorts page, but on fetching it directly that page is specifically about Medicare fraud and photo ID, not general welfare or the NDIS \u2014 that content now sits under health instead. No genuine One Nation page on income support or Centrelink policy has been found yet.', s:O},
-    nat:{v:null,t:'Not covered on the pages read so far.', n:'Checked the regional-services page directly \u2014 its social-security content is specifically about NDIS fraud and provider standards, not JobSeeker, the pension, or income-support levels, which is what this topic tracks.', s:NAT}
+    onp:{v:null,t:'Checked — not addressed on the pages read.', n:'This cell previously cited the /rorts page, but on fetching it directly that page is specifically about Medicare fraud and photo ID, not general welfare or the NDIS \u2014 that content now sits under health instead. No genuine One Nation page on income support or Centrelink policy has been found yet.', s:O},
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'Checked the regional-services page directly \u2014 its social-security content is specifically about NDIS fraud and provider standards, not JobSeeker, the pension, or income-support levels, which is what this topic tracks.', s:NAT}
   }
 },
 {
@@ -633,7 +634,7 @@ const TOPICS = [
     alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
     lib:{v:-2, t:'Keep streets safe from crime, terror and foreign threats as part of its first duty of keeping people safe, supported by a whole-of-nation National Security Strategy.', s:L+'our-plan/australians'},
     onp:{v:-2, t:'Tougher sentencing for gun crime and traffickers, stricter border security, and positive identification of recipients to stop what it calls rorting of health and welfare systems.', s:O+'firearms'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -644,7 +645,7 @@ const TOPICS = [
     alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
     lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
     onp:{v:1,  t:'Push to lower the cost of whole-plant medicinal cannabis for chronic pain and other serious symptoms. Broader legalisation is not proposed.', s:O+'cannabis'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -655,7 +656,7 @@ const TOPICS = [
     alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
     lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
     onp:{v:-2, t:'States that human life begins in the womb and would seek every opportunity to roll back what it calls extreme abortion laws, including reducing gestational limits, banning sex-selective abortion, and reinstating doctors\u2019 right to conscientious objection.', s:O+'pro-life'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 pages on the site\u2019s policy menu have now been read; none addresses this topic. Confirmed absent, not a gap in reading.', s:NAT}
   }
 },
 {
@@ -677,7 +678,7 @@ const TOPICS = [
     alp:{v:1, t:'Extended the two-year ban on foreign purchases of established homes by a further two years and three months, to 30 June 2029, and says it is cracking down on foreign land banking.', s:'https://alp.org.au/our-plan/albanese-labor-government-achievements'},
     lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
     onp:{v:2,  t:'Ban further freehold farmland sales to foreign investors, cap leasehold at 25 years, put essential services off-limits, and stop property sales to non-residents.', s:O+'foreign-ownership'},
-    nat:{v:null,t:'Not covered on the pages read so far.', n:'All 20 of the site\u2019s policy pages have now been checked; none addresses this specifically.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'All 20 of the site\u2019s policy pages have now been checked; none addresses this specifically.', s:NAT}
   }
 },
 {
@@ -699,7 +700,7 @@ const TOPICS = [
     alp:{v:1,  t:'Buying more fuel and fertiliser now, growing jet fuel and diesel reserves to 50 days, and asking gas companies to reserve 20 per cent of exports for Australia.', s:A+'our-policies/building-australias-future/'},
     lib:{v:2,  t:'Double critical fuel reserves to 60 days, back more than a billion litres of new storage through an $800 million facility, support new refineries and alternative fuels, and publish a daily fuel dashboard.', s:L+'our-plan/energy'},
     onp:{v:2,  t:'Secure fuel supplies with 90-day onshore reserves as part of an oil and gas joint venture giving Australians direct ownership of the resource.', s:O+'oil-and-gas'},
-    nat:{v:null,t:'Not covered on the pages read so far.', n:'Checked the resources-and-mining page directly \u2014 it covers mine and gas project approvals, exploration incentives and designating uranium a critical mineral, but says nothing about fuel storage reserves specifically, which is what this topic tracks.', s:NAT}
+    nat:{v:null,t:'Checked — not addressed on the pages read.', n:'Checked the resources-and-mining page directly \u2014 it covers mine and gas project approvals, exploration incentives and designating uranium a critical mineral, but says nothing about fuel storage reserves specifically, which is what this topic tracks.', s:NAT}
   }
 },
 {
@@ -722,6 +723,61 @@ const TOPICS = [
     lib:{v:-2, t:'Protect the Murray\u2013Darling Basin while ending water buybacks it says strip water from farms and towns, backed by a $20 billion Regional Australia Future Fund.', s:L+'our-plan'},
     onp:{v:-2, t:'Build new dams and water infrastructure to increase supply to farmers, require full disclosure of water ownership, and ban sales of water to foreign investors.', s:O+'water'},
     nat:{v:-2,  t:'Would end further water buybacks and cuts to water for farming and towns, lift the water set aside for farmers and businesses, and reform the Commonwealth Environmental Water Holder to return spare water to the consumptive pool at lower cost.', s:NAT+'nationals-policies/water/'}
+  }
+},
+{
+  id:'techai', title:'Technology & AI', domain:'Technology & AI',
+  axis:['Innovation-first, light regulation','Strong regulation and worker protections'],
+  p:{
+    grn:{v:2,  t:'Would set up an Independent AI Regulator and a Digital Rights Commissioner requiring mandatory Digital Rights Impact Assessments, create an AI Workplace Change Division inside Fair Work Australia to oversee high-impact AI use in workplaces, and has called for a moratorium on new data centre construction until mandatory quality standards are in place.', s:'https://greens.org.au/portfolios/digital-rights'},
+    alp:{v:null,t:'Not covered on the pages read so far.', tp:true, n:'Labor\u2019s National Conference endorsed a \u2018Fair AI Taskforce\u2019 platform commitment in July 2026, confirmed by ABC\u2019s direct conference-floor coverage. The government\u2019s National AI Plan is a ministerial, not a party, publication and was excluded on the same basis.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:-1, t:'Backed the government adopting the Opposition\u2019s proposal for a Joint Select Committee on Artificial Intelligence, to examine AI\u2019s impact on national security, productivity and living standards, the adequacy of existing laws, and data sovereignty \u2014 procedural so far, no specific regulatory measures proposed yet. Separately, Shadow Industry Minister Andrew Hastie has said on his own site that data centres can\u2019t run on renewables alone and need baseload power from coal, gas or nuclear.', s:'https://www.liberal.org.au/2026/08/20/establishment-of-a-joint-select-committee-on-artificial-intelligence'},
+    onp:{v:null,t:'Not covered on the pages read so far.', n:'Searched onenation.org.au directly for a technology or AI policy page; none was found.', s:O},
+    nat:{v:null,t:'Not covered on the pages read so far.', n:'Searched nationalsplan.org.au and nationals.org.au directly for an AI or technology policy page; none was found, including among the 20 pages already read for this party.', s:NAT}
+  }
+},
+{
+  id:'infra', title:'Infrastructure and regional investment', domain:'Economy & tax',
+  axis:['Roads, freight and traditional infrastructure','Public transport, ownership and climate-linked infrastructure'],
+  p:{
+    grn:{v:2,  t:'Would set up a Sustainable Cities Agency backed by $40 billion over 10 years, tying federal funding to sustainability standards, commit $10 billion to bring essential infrastructure like ports and airports back into public hands, deliver 50-cent public transport fares nationally, and fund high-speed rail from Brisbane to Melbourne by 2040 kept in public ownership.', s:'https://greens.org.au/portfolios/transport-infrastructure-and-sustainable-cities'},
+    alp:{v:1,  t:'A 12 May 2026 Budget release put $12.1 billion into transport and community infrastructure, including $3.8 billion for Melbourne\u2019s Suburban Rail Loop East, $1.75 billion for freight rail, $812.5 million for the Bruce Highway, and an extra $500 million for the Active Transport Fund on top of $750 million for the Thriving Suburbs and Growing Regions programs.', s:'https://alp.org.au/news/investing-in-transport-and-infrastructure-to-keep-our-communities-connected'},
+    lib:{v:-2, t:'Would restore 80:20 Commonwealth funding for nationally significant regional road projects (from Labor\u2019s reduced 50:50 model), and commit $1 billion to the Local Roads and Community Infrastructure program across two $500 million streams for councils, on top of the $20 billion Regional Australia Future Fund already announced.', s:'https://www.liberal.org.au/2025/04/05/coalition-to-increase-regional-road-funding-to-80-per-cent'},
+    onp:{v:-1, t:'Frames a third round of its apprenticeship wage-subsidy scheme as something to combine with nation-building infrastructure projects in water, rail, roads and energy, though no dedicated infrastructure policy page with further detail was found.', s:O+'jobs'},
+    nat:{v:-2, t:'Would establish a $600 million Ag & Mining Roads program to move farm and mineral freight to port, and re-establish a $1 billion Local Roads and Community Infrastructure program to fix potholes and maintain the 70% of the road network councils are responsible for, on top of a Future Generations Fund earmarked partly for roads, ports, energy and water.', s:'https://www.nationals.org.au/news-posts/building-a-more-productive-safer-and-connected-australia'}
+  }
+},
+{
+  id:'ndis', title:'Disability and the NDIS', domain:'Health & care',
+  axis:['Tighten eligibility and cut cost growth','Guarantee and expand access'],
+  p:{
+    grn:{v:2,  t:'Would raise the NDIS age cap, restore sexual supports by repealing the legislative ban, reverse the government\u2019s NDIS budget cuts, and put $1.6 billion into foundational supports for people with psychosocial disability, saying nearly 241,000 disabled Australians are affected by Labor\u2019s cuts.', s:'https://greens.org.au/portfolios/disability-rights-services'},
+    alp:{v:-1, t:'Says it is fighting NDIS fraud so more of the scheme\u2019s funding reaches people with disability, part of a wider reform push to reduce participant numbers and tighten provider standards. No fuller income-support or eligibility statement was found beyond this.', s:'https://alp.org.au/our-plan/albanese-labor-government-achievements'},
+    lib:{v:-1, t:'Would reserve future access to 17 welfare programs and the NDIS to Australian citizens only, as part of a broader push to reward work and target payments rather than expand entitlements.', s:L+'our-plan/australians'},
+    onp:{v:-2, t:'Wants the NDIS means-tested, ineligible claims like holidays, sex workers and \u2018bogus therapies\u2019 banned outright, providers registered and audited with heavy fines for fraud, and the scheme returned to funding only \u2018reasonable and necessary\u2019 support for people with significant or severe disability.', s:'https://www.onenation.org.au/changes-lacking-detail'},
+    nat:{v:-1, t:'Wants NDIS fraud fixed and provider standards strengthened, framed as making the scheme sustainable and accountable rather than expanding who it covers.', s:NAT+'nationals-policies/regional-services/'}
+  }
+},
+{
+  id:'dv', title:'Domestic violence and women\u2019s safety', domain:'Democracy & rights',
+  axis:['Crisis response and enforcement focus','Systemic prevention and economic security focus'],
+  p:{
+    grn:{v:2,  t:'A costed $15 billion plan for prevention, frontline services and recovery, including $477m for consent education, $10,000 survivor grants, a self-determined National Plan for First Nations women, and raising income support above the poverty line, which Greens senators argue would do more for women\u2019s safety than any single DV program.', s:'https://greens.org.au/portfolios/women'},
+    alp:{v:1,  t:'Says it has committed $218 million to a family violence plan as part of its broader achievements, alongside expanded single parenting payment support. No fuller standalone domestic violence policy statement was found on the pages read.', s:'https://alp.org.au/our-plan/albanese-labor-government-achievements'},
+    lib:{v:-1, t:'A $90 million strategy centred on a National Domestic Violence Register so police can share offender history, tougher monitoring and phone-tracking laws for perpetrators, and closing financial abuse loopholes in the tax and superannuation systems.', s:'https://www.liberal.org.au/2025/04/24/coalition-commitments-to-address-family-and-domestic-violence'},
+    onp:{v:-2, t:'Wants the Domestic Violence Act preamble made gender-neutral, saying protection orders are sometimes used to unfairly restrict fathers\u2019 access to children, and wants both parents present at protection order hearings so allegations can be challenged. This position dates to 2017\u201318; no more recent statement was found.', s:'https://shop.onenation.org.au/blogs/labor-ldp-plan-to-burn-cane-growers/one-nation-domestic-violence-policy-keeping-families-connected'},
+    nat:{v:-1, t:'Would increase funding for crisis helplines so calls from women fleeing violence are answered and get immediate assistance, framed within a broader regional-Australia safety and security platform shared with the Liberal Party.', s:'https://www.nationals.org.au/election-policies/our-plan-to-address-family-and-domestic-violence'}
+  }
+},
+{
+  id:'cyber', title:'Cybersecurity and critical infrastructure', domain:'Technology & AI',
+  axis:['Left to agencies and existing law','A distinct party position or reform push'],
+  p:{
+    grn:{v:null,t:'Checked \u2014 not addressed on the pages read.', n:'Searched greens.org.au directly across three rounds. The only Greens-specific cybersecurity content found dates to 2010\u201311 (an internet-filtering policy and concerns about data-retention laws) \u2014 too old to represent a current position, so it isn\u2019t used.', s:G},
+    alp:{v:null,t:'Checked \u2014 not addressed on the pages read.', n:'Searched alp.org.au directly. Everything found on cyber security and critical infrastructure \u2014 the National Cyber Security Strategy, the Cyber and Infrastructure Security Centre, Systems of National Significance \u2014 comes from government agencies (Home Affairs, ASD) rather than the party\u2019s own site, so it isn\u2019t used here.', s:A},
+    lib:{v:null,t:'Checked \u2014 not addressed on the pages read.', n:'Searched liberal.org.au directly. The Joint Select Committee on AI touches national security in passing, but nothing distinctly about cybersecurity or critical infrastructure policy was found from the party itself.', s:L},
+    onp:{v:null,t:'Checked \u2014 not addressed on the pages read.', n:'Searched onenation.org.au directly across two rounds; nothing on cybersecurity or critical infrastructure was found.', s:O},
+    nat:{v:null,t:'Checked \u2014 not addressed on the pages read.', n:'Searched nationalsplan.org.au and nationals.org.au directly; nothing was found, including among the 20 pages already read for this party.', s:NAT}
   }
 }
 ];
@@ -879,7 +935,7 @@ function renderMatrix(list){
       c.setAttribute('role','button');
       c.setAttribute('aria-label', p.full+': '+t.title+' \u2014 open detail');
       c.innerHTML = trackHTML(d.v,p.colour)+'<p>'+highlight(d.t,q)+'</p>'+
-                    (d.n ? '<p class="flag">'+highlight(d.n,q)+'</p>' : '')+
+                    (d.n ? '<p class="flag'+(d.tp?' tp':'')+'">'+highlight(d.n,q)+'</p>' : '')+
                     '<a class="srclink" href="'+d.s+'" target="_blank" rel="noopener">'+shortSrc(d.s)+' \u2197</a>';
       c.onclick=()=>openDrawer(t,p);
       c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openDrawer(t,p); } };
@@ -1015,6 +1071,7 @@ function openDrawer(t,p){
   const fl = document.getElementById('drawer-flag');
   fl.textContent = d.n || '';
   fl.style.display = d.n ? 'block' : 'none';
+  fl.className = 'flag' + (d.tp ? ' tp' : '');
 
   const pl = document.getElementById('drawer-placement');
   if(d.v===null){
@@ -1041,8 +1098,8 @@ scrim.onclick = closeDrawer;
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
 /* ============================================================
    QUADRANT AXES
-   A fixed, hand-authored set of 11 quadrants: one "Overall" view
-   spanning all 30 topics, plus one per Area domain. There is no
+   A fixed, hand-authored set of quadrants: one "Overall" view
+   spanning every tracked topic, plus one per Area domain. There is no
    live generation and no manual editing — this all runs offline,
    with no Claude account or network call needed. Selecting exactly
    one Area chip above switches to that domain's quadrant; zero or
@@ -1098,7 +1155,8 @@ const QUADRANTS = {
     y:{ low:'More restriction of individual choice', high:'Less restriction of individual choice',
         topics:{ speech:1, firearms:1, abortion:1, crimjustice:1 } }
   },
-  'Foreign & defence':{ single:{ low:'Alliances and military build-up', high:'Diplomacy, peace and non-alignment', topics:{ foreign:1 } } }
+  'Foreign & defence':{ single:{ low:'Alliances and military build-up', high:'Diplomacy, peace and non-alignment', topics:{ foreign:1 } } },
+  'Technology & AI':{ single:{ low:'Innovation-first, light regulation', high:'Strong regulation and worker protections', topics:{ techai:1 } } }
 };
 
 function pickQuadrant(){
@@ -1142,7 +1200,7 @@ function renderQuad(list){
   labs.className='axisedit';
   labs.innerHTML = '<p class="axisintro">'+
     (key==='overall'
-      ? 'Overall view, spanning all 30 tracked topics. Select a single Area filter above for a quadrant built for that area instead.'
+      ? 'Overall view, spanning all '+TOPICS.length+' tracked topics. Select a single Area filter above for a quadrant built for that area instead.'
       : 'Built for the '+key+' area. Clear the Area filter above, or select more than one, to return to the Overall view.')
     +'</p>';
   box.appendChild(labs);
@@ -1278,16 +1336,16 @@ function renderQuad(list){
    COVERAGE — how much of each party's own material has been read
    ============================================================ */
 const COVERAGE = {
-  grn:{fetched:9, checked:15, unchecked:0, est:48, checkedDate:'2 Sep 2026',
-       notes:'Every currently-cited page has been checked at least once \u2014 9 by full fetch (platform, climate, housing, agriculture, justice, nuclear and uranium, first nations, foreign affairs, democracy), 15 confirmed via detailed search results (the taxthebillionaires page blocks automated fetching outright). Several of the 15 corrected or enriched a cell. The 48 estimate is the Greens\u2019 full principle-and-aims index; most of those topics aren\u2019t built into this tool yet.'},
-  alp:{fetched:7, checked:0, unchecked:0, est:9, checkedDate:'3 Sep 2026',
-       notes:'Plan index, cost of living, housing, building the future, the achievements page, and two news releases (a 19 Dec 2025 release on the National Gun Buyback Scheme, a 12 Feb 2026 release on Closing the Gap funding) \u2014 all fetched directly. Health and opportunity pages still return a fetch error and remain unread. Speech, criminal justice, drugs, abortion, agriculture and water were also searched for a relevant news release; none was found from the party\u2019s own site.'},
-  lib:{fetched:5, checked:0, unchecked:0, est:5, checkedDate:'1 Sep 2026',
-       notes:'Plan index, tax, energy, migration, put Australians first \u2014 all fetched directly. First Nations was also searched for a relevant news release; nothing from liberal.org.au itself was found.'},
-  onp:{fetched:9, checked:15, unchecked:0, est:31, checkedDate:'3 Sep 2026',
-       notes:'Every currently-cited page has been checked at least once \u2014 9 by full fetch (issues, oil and gas, coal, nuclear, climate, Medicare fraud/\u201Crorts\u201D, immigration, and two March 2025 releases on Indigenous spending and native title), 15 confirmed via detailed search results. This pass found two cells sourced to the wrong page entirely: borders had cited the firearms page, and welfare had cited a page that turned out to be about Medicare fraud; welfare is now marked not covered since no genuine income-support page was found. The 31 estimate allows for a few more issue pages (trade, veterans) not yet built into this tool as topics.'},
-  nat:{fetched:20, checked:0, unchecked:0, est:20, checkedDate:'3 Sep 2026',
-       notes:'All 20 pages on the site\u2019s policy menu have been fetched directly. Four of them \u2014 building the nation, roads and transport, strong and prosperous regions, regional communications \u2014 turned out to be general infrastructure content that doesn\u2019t map to any topic tracked here. The site simply never addresses renters, education, foreign policy, democracy, free speech, criminal justice, drugs or abortion \u2014 confirmed absent, not unread. On First Nations specifically: the only nationals.org.au statement found predates the 2023 Voice referendum, so it\u2019s treated as historical rather than a current position \u2014 see the red note on that cell.'}
+  grn:{fetched:11, checked:17, unchecked:0, est:48, checkedDate:'3 Sep 2026',
+       notes:'Every currently-cited page has been checked at least once \u2014 11 by full fetch (platform, climate, housing, agriculture, justice, nuclear and uranium, first nations, foreign affairs, democracy, digital rights, transport/infrastructure), 17 confirmed via detailed search results, including disability rights and women\u2019s safety for the two newest topics (the taxthebillionaires page blocks automated fetching outright). Several of the 17 corrected or enriched a cell. Cybersecurity was also searched across three separate rounds; the only Greens-specific content found dates to 2010\u201311, too old to use. The 48 estimate is the Greens\u2019 full principle-and-aims index; most of those topics aren\u2019t built into this tool yet.'},
+  alp:{fetched:8, checked:0, unchecked:0, est:10, checkedDate:'3 Sep 2026',
+       notes:'Plan index, cost of living, housing, building the future, the achievements page, and three news releases (19 Dec 2025 on the National Gun Buyback Scheme, 12 Feb 2026 on Closing the Gap funding, 12 May 2026 on transport and infrastructure) \u2014 all fetched directly. The achievements page also supplied the NDIS and family violence figures used for those two newest topics. Health and opportunity pages still return a fetch error and remain unread. Speech, criminal justice, drugs, abortion, agriculture, water, AI/technology and cybersecurity were also searched for a relevant party statement; none was found from alp.org.au itself for any of them (the AI Taskforce platform decision is real but only confirmed via third-party reporting; cybersecurity content found was entirely from government agencies, not the party).'},
+  lib:{fetched:6, checked:2, unchecked:0, est:8, checkedDate:'3 Sep 2026',
+       notes:'Plan index, tax, energy, migration, put Australians first, and a 20 Aug 2026 media release on the Joint Select Committee on AI \u2014 all fetched directly. Three further releases were confirmed via search results rather than full fetch: two from April 2025 on regional road funding, and an April 2025 release on the party\u2019s domestic violence strategy. On data centres specifically, Shadow Industry Minister Andrew Hastie\u2019s comments were checked against his own site (andrewhastie.com.au) rather than liberal.org.au \u2014 still the party\u2019s own words, in his official capacity, just not on the main party domain. First Nations and cybersecurity were also searched for a relevant release; nothing from liberal.org.au itself was found for either.'},
+  onp:{fetched:9, checked:17, unchecked:0, est:33, checkedDate:'3 Sep 2026',
+       notes:'Every currently-cited page has been checked at least once \u2014 9 by full fetch (issues, oil and gas, coal, nuclear, climate, Medicare fraud/\u201Crorts\u201D, immigration, jobs, and two March 2025 releases on Indigenous spending and native title), 17 confirmed via detailed search results, including NDIS reform and a 2017\u201318 domestic violence policy for the two newest topics \u2014 the DV one is genuinely old and flagged as such on that cell. This pass found two cells sourced to the wrong page entirely: borders had cited the firearms page, and welfare had cited a page that turned out to be about Medicare fraud; welfare is now marked not covered since no genuine income-support page was found. Technology and AI and cybersecurity were also searched directly; no policy page was found for either. The 33 estimate allows for a few more issue pages not yet built into this tool as topics.'},
+  nat:{fetched:20, checked:2, unchecked:0, est:22, checkedDate:'3 Sep 2026',
+       notes:'All 20 pages on the site\u2019s policy menu have been fetched directly. Four of them \u2014 building the nation, roads and transport, strong and prosperous regions, regional communications \u2014 turned out to be general infrastructure content that doesn\u2019t map to any topic tracked here \u2014 until the infrastructure topic was added, when a nationals.org.au news post ($600m Ag & Mining Roads program) was checked via search rather than full fetch, as was a nationals.org.au domestic violence release. The site simply never addresses renters, education, foreign policy, democracy, free speech, criminal justice, drugs, abortion, technology/AI or cybersecurity \u2014 confirmed absent, not unread. On First Nations specifically: the only nationals.org.au statement found predates the 2023 Voice referendum, so it\u2019s treated as historical rather than a current position \u2014 see the red note on that cell.'}
 };
 
 function coverageHTML(){
@@ -1338,8 +1396,11 @@ function render(){
   }
 
   const m = document.getElementById('method');
+  const singleDomains = Object.keys(QUADRANTS).filter(k=>QUADRANTS[k].single);
+  const singleList = singleDomains.length<=1 ? singleDomains.join('')
+    : singleDomains.slice(0,-1).join(', ')+', and '+singleDomains[singleDomains.length-1];
   m.innerHTML = state.view==='quad'
-    ? '<h4>How these quadrants work</h4>There are 11 fixed quadrants, hand-built once rather than generated on the fly: an Overall view spanning all 30 tracked topics, plus one for each of the 10 Area domains. Select exactly one Area filter above to switch to that domain\u2019s quadrant; select none, or more than one, and it falls back to Overall. This runs entirely offline \u2014 no Claude account and no network call needed, which is also why the axes aren\u2019t editable or regenerated per selection the way they briefly were. Education, Work, and Foreign & defence each track only one topic, too little for a genuine second axis, so those show as a line rather than a fabricated scatter. A search filter still narrows which topics actually score within whichever quadrant is showing. Each party\u2019s position is the plain average of its placements across the topics assigned to that axis, so a party with many blank cells on those topics is averaged over fewer of them \u2014 the count under the plot shows how many. Averaging also hides spread: a party sitting near the centre may be genuinely moderate, or split between two extremes.'+coverageHTML()
+    ? '<h4>How these quadrants work</h4>There are '+(Object.keys(QUADRANTS).length)+' fixed quadrants, hand-built once rather than generated on the fly: an Overall view spanning all '+TOPICS.length+' tracked topics, plus one for each of the '+DOMAINS.length+' Area domains. Select exactly one Area filter above to switch to that domain\u2019s quadrant; select none, or more than one, and it falls back to Overall. This runs entirely offline \u2014 no Claude account and no network call needed, which is also why the axes aren\u2019t editable or regenerated per selection the way they briefly were. '+singleList+' each track only one topic, too little for a genuine second axis, so those show as a line rather than a fabricated scatter. A search filter still narrows which topics actually score within whichever quadrant is showing. Each party\u2019s position is the plain average of its placements across the topics assigned to that axis, so a party with many blank cells on those topics is averaged over fewer of them \u2014 the count under the plot shows how many. Averaging also hides spread: a party sitting near the centre may be genuinely moderate, or split between two extremes.'+coverageHTML()
     : state.view==='agree'
     ? '<h4>How overlap is counted</h4>Each pair is scored across the topics where both parties have stated something on their own pages. A topic counts as shared agreement when the two placements sit within one step of each other on that topic\u2019s scale. Topics where either party is silent are excluded, so the denominator changes from pair to pair.'
     : '<h4>How to read this</h4>The wording in every cell is a summary of what the party publishes about itself, not an assessment of whether the claim holds up. Placements on each five-step scale are a reading of those published commitments, made so the material can be sorted and compared \u2014 open any cell to see the wording a placement rests on and follow the link to the original page.'+
