@@ -317,7 +317,7 @@ mark.hl{background:#FCE87A;color:inherit;padding:0 1px;border-radius:2px}
 
 <header class="masthead">
   <h1>In Their Own Words</h1>
-  <p class="standfirst">Every line in this tool is a plain-language summary of what five Australian political parties publish about themselves; policy pages, plan documents and their own news releases from the past year. Nothing here comes from journalists, commentators, think tanks or fact-checkers.</p>
+  <p class="standfirst">Every line in this tool is a plain-language summary of what five Australian political parties publish about themselves at a federal level; policy pages, plan documents and their own news releases. Nothing here comes from journalists, commentators, think tanks or fact-checkers.</p>
   <div class="sourcebar">
     <span>Drawn from:</span>
     <a href="https://greens.org.au/policies" target="_blank" rel="noopener">greens.org.au</a>
@@ -575,10 +575,10 @@ const TOPICS = [
   axis:['No structural change proposed','Truth, treaty and self-determination'],
   p:{
     grn:{v:2,  t:'Says First Nations people never ceded sovereignty. Wants a National Truth and Justice Commission, reform of the Native Title Act around free, prior and informed consent, a federal Act protecting cultural heritage, and full implementation of UNDRIP into federal law.', s:G+'portfolios/first-nations'},
-    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
-    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
-    onp:{v:null,t:'Not covered on the pages read so far.', s:O+'issues'},
-    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+    alp:{v:-1, t:'A 12 Feb 2026 release announced further Closing the Gap funding \u2014 doubling remote jobs places, expanding food-security subsidies, $218m for a family-violence plan, and more health funding \u2014 delivered in partnership with the Coalition of Peaks. Framed entirely around service delivery; no Treaty, Makarrata Commission or constitutional proposal was found.', s:'https://www.alp.org.au/news/new-investments-build-on-progress-in-closing-the-gap'},
+    lib:{v:null,t:'Not covered on the pages read so far.', n:'Searched liberal.org.au\u2019s news section directly for an Indigenous affairs statement. Nothing from the party\u2019s own site came up \u2014 only third-party analysis and government (not party) pages.', s:L+'our-plan'},
+    onp:{v:-2, t:'Two March 2025 releases: would abolish the National Indigenous Australians Agency and audit all Indigenous grant spending, and would end native title and cultural heritage land claims, calling for a race-blind system with no separate recognition or funding.', s:'https://www.onenation.org.au/audit-indigenous-spending-to-close-the-gaps'},
+    nat:{v:null,t:'Not covered on the pages read so far.', n:'The only nationals.org.au statement found is from November 2022, opposing the Voice to Parliament before the 2023 referendum that decided it. Since that referendum failed and the Voice no longer exists as a live proposal, using a pre-referendum statement as the party\u2019s current position would be misleading, so it\u2019s left uncovered rather than used.', s:NAT}
   }
 },
 {
@@ -1280,14 +1280,14 @@ function renderQuad(list){
 const COVERAGE = {
   grn:{fetched:9, checked:15, unchecked:0, est:48, checkedDate:'2 Sep 2026',
        notes:'Every currently-cited page has been checked at least once \u2014 9 by full fetch (platform, climate, housing, agriculture, justice, nuclear and uranium, first nations, foreign affairs, democracy), 15 confirmed via detailed search results (the taxthebillionaires page blocks automated fetching outright). Several of the 15 corrected or enriched a cell. The 48 estimate is the Greens\u2019 full principle-and-aims index; most of those topics aren\u2019t built into this tool yet.'},
-  alp:{fetched:6, checked:0, unchecked:0, est:8, checkedDate:'3 Sep 2026',
-       notes:'Plan index, cost of living, housing, building the future, the achievements page, and a 19 Dec 2025 news release on the National Gun Buyback Scheme \u2014 all fetched directly. Health and opportunity pages still return a fetch error and remain unread. First Nations, speech, criminal justice, drugs, abortion, agriculture and water were also searched for a relevant news release; none was found from the party\u2019s own site.'},
+  alp:{fetched:7, checked:0, unchecked:0, est:9, checkedDate:'3 Sep 2026',
+       notes:'Plan index, cost of living, housing, building the future, the achievements page, and two news releases (a 19 Dec 2025 release on the National Gun Buyback Scheme, a 12 Feb 2026 release on Closing the Gap funding) \u2014 all fetched directly. Health and opportunity pages still return a fetch error and remain unread. Speech, criminal justice, drugs, abortion, agriculture and water were also searched for a relevant news release; none was found from the party\u2019s own site.'},
   lib:{fetched:5, checked:0, unchecked:0, est:5, checkedDate:'1 Sep 2026',
-       notes:'Plan index, tax, energy, migration, put Australians first \u2014 all fetched directly.'},
-  onp:{fetched:7, checked:15, unchecked:0, est:29, checkedDate:'2 Sep 2026',
-       notes:'Every currently-cited page has been checked at least once \u2014 7 by full fetch (issues, oil and gas, coal, nuclear, climate, Medicare fraud/\u201Crorts\u201D, immigration), 15 confirmed via detailed search results. This pass found two cells sourced to the wrong page entirely: borders had cited the firearms page, and welfare had cited a page that turned out to be about Medicare fraud; welfare is now marked not covered since no genuine income-support page was found. The 29 estimate allows for a few more issue pages (trade, veterans) not yet built into this tool as topics.'},
+       notes:'Plan index, tax, energy, migration, put Australians first \u2014 all fetched directly. First Nations was also searched for a relevant news release; nothing from liberal.org.au itself was found.'},
+  onp:{fetched:9, checked:15, unchecked:0, est:31, checkedDate:'3 Sep 2026',
+       notes:'Every currently-cited page has been checked at least once \u2014 9 by full fetch (issues, oil and gas, coal, nuclear, climate, Medicare fraud/\u201Crorts\u201D, immigration, and two March 2025 releases on Indigenous spending and native title), 15 confirmed via detailed search results. This pass found two cells sourced to the wrong page entirely: borders had cited the firearms page, and welfare had cited a page that turned out to be about Medicare fraud; welfare is now marked not covered since no genuine income-support page was found. The 31 estimate allows for a few more issue pages (trade, veterans) not yet built into this tool as topics.'},
   nat:{fetched:20, checked:0, unchecked:0, est:20, checkedDate:'3 Sep 2026',
-       notes:'All 20 pages on the site\u2019s policy menu have been fetched directly. Four of them \u2014 building the nation, roads and transport, strong and prosperous regions, regional communications \u2014 turned out to be general infrastructure content that doesn\u2019t map to any topic tracked here. The site simply never addresses renters, education, First Nations, foreign policy, democracy, free speech, criminal justice, drugs or abortion \u2014 confirmed absent, not unread.'}
+       notes:'All 20 pages on the site\u2019s policy menu have been fetched directly. Four of them \u2014 building the nation, roads and transport, strong and prosperous regions, regional communications \u2014 turned out to be general infrastructure content that doesn\u2019t map to any topic tracked here. The site simply never addresses renters, education, foreign policy, democracy, free speech, criminal justice, drugs or abortion \u2014 confirmed absent, not unread. On First Nations specifically: the only nationals.org.au statement found predates the 2023 Voice referendum, so it\u2019s treated as historical rather than a current position \u2014 see the red note on that cell.'}
 };
 
 function coverageHTML(){
