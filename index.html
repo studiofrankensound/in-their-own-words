@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In Their Own Words — five Australian parties compared</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FCFCFA;
+  --ink:#14161A;
+  --rule:#D6D4CC;
+  --rule-strong:#A9A69C;
+  --muted:#6E6D67;
+  --panel:#F2F1EC;
+  --flag:#A32319;
+  --grn:#0E7A3C;
+  --alp:#C8102E;
+  --lib:#00529B;
+  --onp:#D95E08;
+  --sans:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- masthead ---------- */
+.masthead{padding:44px 0 22px;border-bottom:2px solid var(--ink)}
+h1{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(30px,5.2vw,52px);
+  line-height:1.02;
+  letter-spacing:-0.028em;
+  margin:0 0 14px;
+  max-width:16ch;
+}
+.standfirst{
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.55;
+  max-width:62ch;
+  margin:0 0 18px;
+  color:#3A3B3D;
+}
+.sourcebar{display:flex;flex-wrap:wrap;gap:6px 22px;padding-top:4px}
+.sourcebar a{
+  font-size:12.5px;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--rule);padding-bottom:1px;
+}
+.sourcebar a:hover,.sourcebar a:focus-visible{color:var(--ink);border-color:var(--ink)}
+.sourcebar span{font-size:12.5px;color:var(--muted)}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky;top:0;z-index:40;background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  padding:14px 0 12px;
+}
+.controlrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.search{
+  flex:1 1 260px;min-width:200px;position:relative;
+}
+.search input{
+  width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);
+  background:transparent;border:0;border-bottom:1.5px solid var(--ink);
+  padding:7px 2px;outline:none;
+}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{border-color:var(--grn)}
+.viewtabs{display:flex;border:2px solid var(--ink);flex:0 0 auto}
+.viewtabs button{
+  font-family:var(--sans);font-size:14px;font-weight:600;
+  background:transparent;border:0;border-right:1.5px solid var(--ink);
+  padding:11px 18px;cursor:pointer;color:var(--ink);
+}
+.viewtabs button:last-child{border-right:0}
+.viewtabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.viewtabs button:focus-visible{outline:2px solid var(--grn);outline-offset:2px}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;align-items:center}
+.chiplabel{font-size:12px;color:var(--muted);margin-right:2px}
+.chip{
+  font-family:var(--sans);font-size:12.5px;background:transparent;
+  border:1px solid var(--rule-strong);border-radius:100px;padding:4px 11px;
+  cursor:pointer;color:var(--muted);
+}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip:focus-visible{outline:2px solid var(--grn);outline-offset:2px}
+.partychip{border-radius:0;border-width:1.5px;font-weight:500;display:flex;align-items:center;gap:7px}
+.partychip .key{width:9px;height:9px;display:inline-block}
+.partychip[aria-pressed="true"]{color:var(--paper)}
+.count{font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap}
+
+/* ---------- matrix ---------- */
+.matrix{margin-top:26px;overflow-x:auto}
+.mgrid{display:grid;min-width:min-content}
+.mhead{
+  position:sticky;top:0;background:var(--paper);
+  font-size:12px;font-weight:600;letter-spacing:0.01em;
+  padding:0 0 9px;border-bottom:2px solid var(--ink);
+}
+.mhead.party{padding-left:14px}
+.mhead .pname{display:block}
+.mhead .pmeta{display:block;font-weight:400;color:var(--muted);font-size:11px;margin-top:2px}
+.topiccell{
+  padding:16px 10px 16px 0;border-bottom:1px solid var(--rule);
+  position:sticky;left:0;background:var(--paper);z-index:2;
+}
+.topiccell h3{font-size:13.5px;font-weight:600;margin:0 0 3px;letter-spacing:-0.006em;line-height:1.25}
+.topiccell .dom{font-size:10.5px;color:var(--muted)}
+.topiccell .axis{font-size:10px;color:var(--muted);margin-top:7px;line-height:1.35;max-width:14ch}
+.cell{
+  padding:16px 18px 16px 14px;border-bottom:1px solid var(--rule);
+  border-left:1px solid var(--rule);
+  cursor:pointer;background:transparent;text-align:left;
+  font-family:inherit;color:inherit;width:100%;
+}
+.cell:hover{background:var(--panel)}
+.cell:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.cell p{
+  font-family:var(--serif);font-size:14px;line-height:1.5;margin:9px 0 0;color:#2C2E31;
+}
+.cell .srclink{
+  display:inline-block;margin-top:10px;font-family:var(--sans);font-size:10.5px;
+  color:var(--muted);text-decoration:none;opacity:.75;word-break:break-all;
+}
+.cell .srclink:hover,.cell .srclink:focus-visible{color:var(--ink);opacity:1;text-decoration:underline}
+.cell.silent p{color:var(--muted);font-style:italic}
+mark.hl{background:#FCE87A;color:inherit;padding:0 1px;border-radius:2px}
+.cell p.flag,.drawer p.flag{
+  font-family:var(--sans);font-size:11.5px;line-height:1.4;font-style:normal;
+  color:var(--flag);margin-top:8px;padding-left:9px;border-left:2px solid var(--flag);
+}
+.drawer p.flag{font-size:12.5px;margin:0 0 22px}
+.track{display:flex;gap:2px;align-items:center}
+.track i{display:block;width:11px;height:4px;background:var(--rule)}
+.track i.on{height:8px}
+.track .na{font-size:10.5px;color:var(--muted);font-style:normal;letter-spacing:0.02em}
+
+/* ---------- stance map ---------- */
+.map{margin-top:30px}
+.maprow{padding:18px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:start}
+.maprow h3{font-size:14px;font-weight:600;margin:0 0 2px}
+.maprow .dom{font-size:11px;color:var(--muted)}
+.scale{padding-top:1px}
+.ends{display:flex;justify-content:space-between;align-items:flex-start;gap:26px;margin-bottom:10px}
+.ends span{font-size:10.5px;color:var(--muted);line-height:1.3;max-width:45%}
+.ends span+span{text-align:right}
+.band{position:relative;height:66px}
+.band .line{position:absolute;top:33px;left:0;right:0;height:1px;background:var(--rule-strong)}
+.band .tick{position:absolute;top:29px;width:1px;height:9px;background:var(--rule)}
+.dot{position:absolute;width:14px;height:14px;border-radius:50%;margin-left:-7px;border:2px solid var(--paper)}
+.silent{font-size:11px;color:var(--muted);margin-top:6px}
+.mapkey{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:12px;color:var(--muted)}
+.mapkey b{display:flex;align-items:center;gap:6px;font-weight:400}
+.mapkey i{width:11px;height:11px;border-radius:50%;display:block}
+
+/* ---------- agreement ---------- */
+.agree{margin-top:30px;max-width:760px}
+.agree table{border-collapse:collapse;width:100%}
+.agree th,.agree td{border:1px solid var(--rule);padding:14px 10px;text-align:center;font-size:13px}
+.agree th{font-weight:600;font-size:12.5px}
+.agree td.self{background:repeating-linear-gradient(45deg,var(--panel),var(--panel) 4px,transparent 4px,transparent 8px)}
+.agree td b{display:block;font-size:21px;font-weight:600;letter-spacing:-0.02em}
+.agree td small{color:var(--muted);font-size:11px}
+.agree .rowlab{text-align:left;font-weight:600;font-size:12.5px;white-space:nowrap}
+.agree .pk{display:inline-block;width:9px;height:9px;margin-right:6px}
+
+/* ---------- quadrant ---------- */
+.quad{margin-top:26px}
+.axisedit{padding-bottom:22px;border-bottom:1px solid var(--rule)}
+.axisintro{font-size:12.5px;color:var(--muted);margin:0 0 16px;max-width:640px}
+.axisrow{display:flex;align-items:baseline;gap:14px;padding:6px 0}
+.axisrow-top span{font-size:11.5px;color:var(--muted);width:110px;flex:0 0 auto}
+.axislabel{font-family:var(--sans);font-size:14px;color:var(--ink);font-weight:500}
+.plotwrap{
+  position:relative;max-width:560px;margin:34px auto 0;
+  padding:26px 30px;
+}
+.plot{position:relative;aspect-ratio:1;border:1px solid var(--rule)}
+.qaxis{position:absolute;background:var(--rule-strong)}
+.qaxis.qv{left:50%;top:0;bottom:0;width:1px}
+.qaxis.qh{top:50%;left:0;right:0;height:1px}
+.qname{position:absolute;font-size:10px;color:var(--muted);max-width:44%;line-height:1.3}
+.qname.q1{top:8px;left:9px}
+.qname.q2{top:8px;right:9px;text-align:right}
+.qname.q3{bottom:8px;left:9px}
+.qname.q4{bottom:8px;right:9px;text-align:right}
+.qlab{position:absolute;font-size:12px;font-weight:600;color:var(--ink)}
+.qlab.qtop{top:2px;left:50%;transform:translateX(-50%)}
+.qlab.qbottom{bottom:2px;left:50%;transform:translateX(-50%)}
+.qlab.qleft{left:0;top:50%;transform:translateY(-50%)}
+.qlab.qright{right:0;top:50%;transform:translateY(-50%)}
+.qlab.qleft span,.qlab.qright span{display:block;writing-mode:vertical-rl;transform:rotate(180deg)}
+.qlab.qright span{transform:none}
+.qdot{position:absolute;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--paper)}
+.qreadout{margin:30px auto 0;max-width:640px;font-size:12px;color:#3A3B3D}
+.qreadout div{padding:6px 0;border-bottom:1px solid var(--rule)}
+.qreadout small{color:var(--muted)}
+.qempty{
+  font-family:var(--serif);font-size:14.5px;line-height:1.6;color:var(--muted);
+  max-width:38ch;margin:20px auto;text-align:center;padding:30px 10px;
+}
+.qmissing{margin-top:6px;max-width:640px;margin-left:auto;margin-right:auto}
+.qmissing div{
+  font-size:12px;color:var(--flag);line-height:1.5;padding:8px 0 8px 9px;
+  border-left:2px solid var(--flag);border-bottom:1px solid var(--rule);margin-top:8px;
+}
+.qmissing .pk{display:inline-block;width:9px;height:9px;margin-right:6px}
+.qmissing b{color:var(--ink)}
+@media (max-width:600px){
+  .plotwrap{padding:24px 22px}
+}
+
+/* ---------- shared ---------- */
+.note{
+  font-family:var(--serif);font-size:14.5px;line-height:1.6;color:#3A3B3D;
+  max-width:66ch;margin:26px 0 0;padding-top:18px;border-top:1px solid var(--rule);
+}
+.note h4{font-family:var(--sans);font-size:12.5px;font-weight:600;margin:0 0 8px}
+.coverage{font-family:var(--sans);margin-top:10px}
+.covrow{padding:9px 0;border-bottom:1px solid var(--rule);font-size:12.5px}
+.covtop{display:flex;align-items:center;gap:10px}
+.covtop b{flex:0 0 auto;min-width:66px;font-weight:600}
+.covbar{flex:1 1 auto;display:block;height:5px;background:var(--panel)}
+.covbar i{display:block;height:5px}
+.covnum{color:var(--muted);font-size:11.5px;line-height:1.4;margin:6px 0 0 24px}
+.covnote{font-size:11px;color:var(--muted);line-height:1.4;margin:3px 0 0 24px}
+.empty{padding:60px 0;font-family:var(--serif);font-size:16px;color:var(--muted);max-width:44ch}
+.pagefoot{
+  margin-top:34px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--muted);
+}
+.pagefoot a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+.pagefoot a:hover,.pagefoot a:focus-visible{color:var(--ink);border-color:var(--ink)}
+
+/* ---------- detail drawer ---------- */
+.drawer{
+  position:fixed;right:0;bottom:0;top:0;width:min(430px,100%);
+  background:var(--paper);border-left:2px solid var(--ink);
+  padding:26px 26px 40px;overflow-y:auto;z-index:80;
+  transform:translateX(101%);transition:transform .22s ease;
+}
+.drawer[data-open="true"]{transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
+.drawer .kicker{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;margin-bottom:14px}
+.drawer .kicker i{width:11px;height:11px;display:block}
+.drawer h2{font-size:22px;font-weight:700;letter-spacing:-0.02em;margin:0 0 4px;line-height:1.15}
+.drawer .dom{font-size:12px;color:var(--muted);margin-bottom:20px}
+.drawer .body{font-family:var(--serif);font-size:16px;line-height:1.6;margin:0 0 22px}
+.drawer .placement{border-top:1px solid var(--rule);padding-top:16px;margin-bottom:22px}
+.drawer .placement span{font-size:11.5px;color:var(--muted);display:block;margin-bottom:9px}
+.drawer a.src{font-size:13px;color:var(--ink);word-break:break-all}
+.drawer button.close{
+  position:absolute;top:18px;right:20px;background:transparent;border:1px solid var(--rule-strong);
+  width:30px;height:30px;cursor:pointer;font-size:15px;line-height:1;color:var(--ink);
+}
+.scrim{position:fixed;inset:0;background:rgba(20,22,26,.28);z-index:70;display:none}
+.scrim[data-open="true"]{display:block}
+
+@media (max-width:1130px){
+  .maprow{grid-template-columns:1fr;gap:8px}
+  .drawer{width:100%;border-left:0;border-top:2px solid var(--ink);top:auto;height:82vh;transform:translateY(101%)}
+  .drawer[data-open="true"]{transform:translateY(0)}
+
+  /* ---- tighter, scrollable controls so the sticky header doesn't
+         eat the screen with two rows of wrapped chips ---- */
+  .controls{padding:10px 0 8px}
+  .controlrow{gap:8px}
+  .viewtabs button{padding:7px 9px;font-size:12px}
+  #domainchips{flex-wrap:wrap}
+  #partychips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    margin:10px -20px 0;padding:0 20px 6px;scrollbar-width:thin}
+  #partychips .chiplabel,#partychips .chip{flex:0 0 auto;white-space:nowrap}
+  .count{display:none}
+
+  /* ---- matrix: collapse the party-per-column grid into one card
+         per topic, with each party's own block labelled and
+         colour-coded inline, instead of horizontal scrolling
+         through a six-column table ---- */
+  .matrix{overflow-x:visible}
+  .mgrid{grid-template-columns:1fr !important;min-width:0}
+  .mhead{display:none}
+  .topiccell{position:static;padding:22px 0 8px;border-top:3px solid var(--ink);border-bottom:0}
+  .topiccell:first-child{border-top:0}
+  .topiccell .axis{display:block;max-width:none;margin-top:5px}
+  .cell{
+    border-top:1px solid var(--rule);border-bottom:0;
+    border-left:3px solid var(--pc,var(--rule-strong));
+    padding:14px 0 14px 13px;
+  }
+  .cell::before{
+    content:attr(data-party);display:block;font-size:11.5px;font-weight:600;
+    color:var(--pc,var(--muted));margin-bottom:2px;
+  }
+
+  /* ---- overlap table: shrink so five parties fit without the
+         cramped feel, still scrolls if a sixth party is ever added ---- */
+  .agree{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .agree th,.agree td{padding:10px 6px;font-size:12px}
+  .agree td b{font-size:17px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <h1>In Their Own Words</h1>
+  <p class="standfirst">Every line in this tool is a plain-language summary of what five Australian political parties publish about themselves; policy pages, plan documents and their own news releases from the past year. Nothing here comes from journalists, commentators, think tanks or fact-checkers.</p>
+  <div class="sourcebar">
+    <span>Drawn from:</span>
+    <a href="https://greens.org.au/policies" target="_blank" rel="noopener">greens.org.au</a>
+    <a href="https://www.alp.org.au/our-plan/what-were-working-on/" target="_blank" rel="noopener">alp.org.au</a>
+    <a href="https://www.liberal.org.au/our-plan" target="_blank" rel="noopener">liberal.org.au</a>
+    <a href="https://www.onenation.org.au/issues" target="_blank" rel="noopener">onenation.org.au</a>
+    <a href="https://nationalsplan.org.au/" target="_blank" rel="noopener">nationalsplan.org.au</a>
+    <span>Last checked 1–3 September 2026, per party below</span>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controlrow">
+    <div class="viewtabs" role="group" aria-label="View">
+      <button id="tab-matrix" aria-pressed="true">Matrix</button>
+      <button id="tab-map" aria-pressed="false">Stance map</button>
+      <button id="tab-agree" aria-pressed="false">Overlap</button>
+      <button id="tab-quad" aria-pressed="false">Quadrant</button>
+    </div>
+    <div class="search">
+      <input id="q" type="search" placeholder="Search topics and positions — try nuclear, rent, migration" autocomplete="off" aria-label="Search topics and positions">
+    </div>
+  </div>
+  <div class="chips" id="domainchips">
+    <span class="chiplabel">Filter Topics</span>
+  </div>
+  <div class="chips" id="partychips">
+    <span class="chiplabel">Parties</span>
+    <span class="count" id="count"></span>
+  </div>
+</div>
+
+<main id="stage"></main>
+
+<div class="note" id="method"></div>
+
+<footer class="pagefoot">Made for fun with Claude &middot; Other (very different) projects at <a href="https://www.frankensound.com.au/" target="_blank" rel="noopener">frankensound.com.au</a></footer>
+
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
+  <button class="close" id="drawer-close" aria-label="Close">&times;</button>
+  <div class="kicker" id="drawer-kicker"></div>
+  <h2 id="drawer-title"></h2>
+  <div class="dom" id="drawer-dom"></div>
+  <p class="body" id="drawer-body"></p>
+  <p class="flag" id="drawer-flag" style="display:none"></p>
+  <div class="placement" id="drawer-placement"></div>
+  <a class="src" id="drawer-src" target="_blank" rel="noopener"></a>
+</aside>
+
+<script>
+/* ============================================================
+   PARTIES
+   ============================================================ */
+const PARTIES = [
+  {id:'grn', name:'Greens',      full:'Australian Greens',              colour:'#0E7A3C', site:'greens.org.au'},
+  {id:'alp', name:'Labor',       full:'Australian Labor Party',         colour:'#C8102E', site:'alp.org.au'},
+  {id:'lib', name:'Liberal',     full:'Liberal Party (Coalition)',      colour:'#00529B', site:'liberal.org.au'},
+  {id:'onp', name:'One Nation',  full:"Pauline Hanson's One Nation",    colour:'#D95E08', site:'onenation.org.au'},
+  {id:'nat', name:'Nationals',   full:'The Nationals (Coalition)',      colour:'#8A5A1E', site:'nationalsplan.org.au'}
+];
+
+/* ============================================================
+   TOPICS
+   v: -2 .. +2 along the topic's own axis, or null when the
+   party's listed pages do not address the topic.
+   ============================================================ */
+const G   = 'https://greens.org.au/';
+const A   = 'https://www.alp.org.au/';
+const L   = 'https://www.liberal.org.au/';
+const O   = 'https://www.onenation.org.au/';
+const NAT = 'https://nationalsplan.org.au/';
+
+const TOPICS = [
+{
+  id:'climate', title:'Climate targets', domain:'Energy & climate',
+  axis:['Fewer emissions constraints','Stronger emissions constraints'],
+  p:{
+    grn:{v:2,  t:'Treats the climate crisis as damaging ecosystems and communities, and wants Australia to lead the world in moving away from coal and gas.', s:G+'climate'},
+    alp:{v:1,  t:'Net zero is in law, with a commitment to cut emissions 62 to 70 per cent by 2035. Says voters chose real climate action and the renewable jobs that come with it.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:-2, t:'Would scrap net zero and its mandates. Argues affordability and reliability matter more than international goals most countries are missing, and that emissions should fall only as fast as technology allows without extra cost.', s:L+'our-plan/energy'},
+    onp:{v:-2, t:'Says research should continue but that after thirty years of IPCC work there is not sufficient evidence for the warming or the catastrophes claimed. Describes itself as the only party questioning climate science.', s:O+'climate'},
+    nat:{v:-2,  t:'Says Australia should be one of the cheapest and most energy secure nations on earth, and would scrap net zero rather than move faster than comparable countries at the cost of jobs and industry. Backs a technology-neutral mix of coal, gas, oil, nuclear and renewables, and opposes the Safeguard Mechanism and other hidden carbon costs.', s:NAT+'nationals-policies/scrap-net-zero/'}
+  }
+},
+{
+  id:'energy', title:'Energy mix', domain:'Energy & climate',
+  axis:['Fossil-fuel led','Renewables led'],
+  p:{
+    grn:{v:2,  t:'Stop new coal and gas, expand publicly owned renewables, end handouts to coal, oil and gas, and subsidise solar and batteries for homes and small business.', s:G+'climate'},
+    alp:{v:1,  t:'Says it has approved enough renewables to power every home and made home batteries cheaper, while building solar panels and wind turbines here. Also asks gas exporters to reserve 20 per cent for domestic use.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:-2, t:'Back any technology that is affordable and reliable — coal, gas, hydro, nuclear, batteries and renewables in the right places. Work with owners to run coal plants as long and hard as possible, and unlock new gas basins.', s:L+'our-plan/energy'},
+    onp:{v:-2, t:'Presents coal as reliable and affordable power that remains vital to national strength, and argues renewables are struggling to meet demand.', s:O+'embracing-australian-coal-reliable-energy-future'},
+    nat:{v:-2,  t:'Wants energy abundance from the fuels already in use \u2014 coal, gas, oil, hydro, nuclear and renewables together \u2014 arguing all technologies should compete on cost and reliability rather than being phased out on a fixed timetable.', s:NAT+'nationals-policies/scrap-net-zero/'}
+  }
+},
+{
+  id:'nuclear', title:'Nuclear power', domain:'Energy & climate',
+  axis:['Keep the ban','Lift the ban'],
+  p:{
+    grn:{v:-2, t:'No nuclear power, weapons or mining. Wants a world free of nuclear power and weapons, the end of Australian uranium mining and export, and closure of Australian ports and waters to nuclear-powered or nuclear-armed vessels.', s:G+'policies/nuclear-and-uranium'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:2,  t:'Lift the nuclear ban, as part of backing any technology that can deliver affordable and reliable power.', s:L+'our-plan/energy'},
+    onp:{v:2,  t:'Says nuclear offers reliable baseload power, lower emissions and long-term affordability, alongside hydro.', s:O+'embracing-nuclear-energy-hydro-australia-future'},
+    nat:{v:2,  t:'Would lift the nuclear ban so nuclear can compete alongside coal, gas, hydro and renewables, pointing to Australia\u2019s uranium reserves as the largest in the world. Says lifting the ban would not commit Australia to building reactors immediately, only to researching and assessing the option.', s:NAT+'nationals-policies/nuclear/'}
+  }
+},
+{
+  id:'incometax', title:'Personal income tax', domain:'Economy & tax',
+  axis:['Raise more revenue','Cut personal tax'],
+  p:{
+    grn:{v:-1, t:'The emphasis is on raising revenue from billionaires and big corporations to fund services, rather than on cutting personal income tax.', s:G+'taxthebillionaires'},
+    alp:{v:1,  t:'Tax cuts in two successive years, a further $250 off every working person permanently, a $1,000 instant deduction with no receipts, and lower fuel tax.', s:A+'our-policies/help-with-the-cost-of-living/'},
+    lib:{v:2,  t:'A Tax Back Guarantee indexing the bottom two tax thresholds to inflation from 2028-29 and all thresholds from 2031-32, so wage rises that only match inflation are not taxed as though they were real gains.', s:L+'our-plan/tax'},
+    onp:{v:2,  t:'Raise the tax-free threshold to $35,000 for self-funded retirees, let couples with a dependent child split income for tax purposes, halve the fuel excise to 26 cents a litre for three years, and remove excise on beer and spirits sold in venues.', s:O+'reduce-cost-of-living'},
+    nat:{v:2,  t:'A Tax Back Guarantee indexing the bottom two income tax thresholds to inflation from 2028-29 and all thresholds from 2031-32, so bracket creep can\u2019t quietly raise tax as wages rise with prices.', s:NAT+'nationals-policies/tax-back-guarantee/'}
+  }
+},
+{
+  id:'bigtax', title:'Company and wealth taxation', domain:'Economy & tax',
+  axis:['Lower business taxes','Higher taxes on corporations and wealth'],
+  p:{
+    grn:{v:2,  t:'A 10% annual tax on billionaires\u2019 net wealth and 5% on wealth between $100 million and $1 billion, a 40% tax on excess profits for corporations turning over more than $100 million, and closing loopholes that let big oil and gas pay no tax. Says almost one in three big corporations paid no tax last year.', s:G+'taxthebillionaires'},
+    alp:{v:1,  t:'The listed pages focus on closing property-investor tax advantages and steering investment toward new construction, rather than on broad company tax changes.', s:A+'our-policies/a-fair-go-at-your-own-home/'},
+    lib:{v:-2, t:'Axe the capital gains changes, the 30 per cent minimum tax on trusts and the negative gearing changes. A permanent $50,000 instant asset write-off for businesses turning over under $10 million, and wider access to CGT concessions.', s:L+'our-plan/tax'},
+    onp:{v:1,  t:'Opposes a higher GST and any return of death duties, wants multinationals to pay their share, and would replace the petroleum resource rent tax with a flat royalty plus a Norway-style state investment vehicle in oil and gas.', s:O+'oil-and-gas'},
+    nat:{v:1,  t:'Would repeal Labor\u2019s negative gearing, capital gains and small-business tax changes and abolish the Safeguard Mechanism. Backs divestiture powers to break up firms proven to abuse market power, citing precedents in the US, UK and EU, calling it a backstop rather than a punishment for success.', s:NAT+'nationals-policies/scrapping-labors-taxes/'}
+  }
+},
+{
+  id:'supply', title:'Housing supply', domain:'Housing',
+  axis:['Cheaper private building','Government-built housing'],
+  p:{
+    grn:{v:2,  t:'A government-owned developer building good quality homes, sold and rented at prices people can actually afford.', s:G+'housing'},
+    alp:{v:1,  t:'1.2 million homes including 55,000 social and affordable through the Housing Australia Future Fund, 100,000 set aside for first home buyers, and a fund for the water, power and roads new estates need.', s:A+'our-policies/a-fair-go-at-your-own-home/'},
+    lib:{v:-1, t:'A $5 billion fund for last-mile infrastructure to unlock up to 400,000 homes, a simplified construction code to cut up to $70,000 from a build, and abolition of the Housing Australia Future Fund and build-to-rent tax breaks.', s:L+'our-plan/migration'},
+    onp:{v:-1, t:'A five-year GST exemption on materials for new homes up to $1 million, a review of government fees, and removal of mandatory disability compliance rules.', s:O+'new-housing'},
+    nat:{v:-1,  t:'Backs one-off funding for the water, roads and power new housing developments need, and wants councils to release more land, on top of cutting migration to ease demand. Says Australia is short around 60,000 homes a year against a 240,000-a-year build target.', s:NAT+'nationals-policies/homes-and-families/'}
+  }
+},
+{
+  id:'renters', title:'Renters and investor tax breaks', domain:'Housing',
+  axis:['Protect investor settings','Shift settings to renters and first buyers'],
+  p:{
+    grn:{v:2,  t:'Cap rent rises at 2 per cent every two years, phase out negative gearing and the capital gains discount for people with more than one investment property, and set up a National Renters Protection Authority.', s:G+'housing'},
+    alp:{v:1,  t:'Change investor tax breaks so first home buyers stop losing at auction, while keeping negative gearing for newly built homes and grandfathering existing arrangements. Five per cent deposits for first home buyers.', s:A+'our-policies/a-fair-go-at-your-own-home/'},
+    lib:{v:-2, t:'Axe the negative gearing changes, described as a housing tax, and reserve the five per cent deposit scheme for Australian citizens.', s:L+'our-plan/tax'},
+    onp:{v:0,  t:'Would stop property sales to non-residents and non-citizens on housing-shortage grounds. Negative gearing is not addressed on these pages.', s:O+'foreign-ownership'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'col', title:'Cost of living', domain:'Economy & tax',
+  axis:['Relief through lower taxes and less regulation','Relief through direct intervention in prices'],
+  p:{
+    grn:{v:2,  t:'Fifty-cent public transport fares, making supermarket price gouging illegal and breaking up the duopoly, free school lunches and an $800 back-to-school payment.', s:G+'cost-of-living'},
+    alp:{v:2,  t:'Supermarket price gouging made illegal, new petrol gouging laws, card surcharges banned, plus tax cuts and cheaper medicines.', s:A+'our-policies/help-with-the-cost-of-living/'},
+    lib:{v:-2, t:'Frames relief as lower taxes, cheaper power and less red tape rather than direct payments, arguing government spending at a 40-year high is itself fuelling inflation.', s:L+'our-plan'},
+    onp:{v:1,  t:'Cut electricity bills 20 per cent through changes to the National Electricity Market, halve the fuel excise, reduce freight costs, and lift Medicare rebates.', s:O+'reduce-cost-of-living'},
+    nat:{v:1,  t:'Frames cost-of-living relief around lower taxes and cheaper energy rather than direct payments, pointing to a 37 per cent rise in electricity prices and unmet Labor bill-cut promises as evidence its approach is needed.', s:NAT+'nationals-policies/scrap-net-zero/'}
+  }
+},
+{
+  id:'migration', title:'Immigration levels', domain:'Immigration & borders',
+  axis:['Lower the intake','Maintain or grow the intake'],
+  p:{
+    grn:{v:2,  t:'Says Australian society benefits from immigration, and that the country has humanitarian and legal obligations to accept refugees and reunite families under international law and the Refugee Convention.', s:G+'policies/immigration-and-refugees'},
+    alp:{v:null,t:'Not covered on the pages read so far.', n:'Searched Labor\u2019s news releases as well as the plan pages. Nothing published \u2014 the party has not settled a public position, so the gap is real rather than unread.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:-2, t:'Cap net overseas migration each year below the number of homes completed, and overhaul skilled migration to bring in the trades businesses need.', s:L+'our-plan/migration'},
+    onp:{v:-2, t:'Says the population has surged past 27 million, overwhelming housing, infrastructure and services while wages stagnate. Would cap visas at 130,000 a year, a cut of more than 570,000 from current levels, deport 75,000 people it says are here unlawfully, and end student visa loopholes.', s:O+'immigration'},
+    nat:{v:-2,  t:'Wants migration brought back to sustainable levels and linked to how many homes are actually built, citing 1.6 million people brought in over four years without matching housing and hospitals, and would end what it calls abuse of the student visa loophole.', s:NAT+'nationals-policies/cutting-immigration/'}
+  }
+},
+{
+  id:'borders', title:'Visas, borders and asylum', domain:'Immigration & borders',
+  axis:['Enforcement first','Rights of arrivals first'],
+  p:{
+    grn:{v:2,  t:'Would end offshore detention and bring everyone still in Nauru or PNG to Australia, cap immigration detention at 7 days, launch a Royal Commission into the detention regime, and repeal Labor\u2019s travel-ban, deportation and phone-ban laws.', s:G+'portfolios/immigration'},
+    alp:{v:null,t:'Not covered on the pages read so far.', n:'Same search as the migration row. The humanitarian intake number is being reworked and has not been announced by the party.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:-2, t:'Make the Australian Values Statement a binding visa condition, introduce a Safe Country List to fast-track refusal of unfounded claims, restore temporary protection visas, fund deportations, and vet visa applicants including their social media.', s:L+'our-plan/migration'},
+    onp:{v:-2, t:'Would reintroduce Temporary Protection Visas, withdraw Australia from the UN Refugee Convention, refuse entry to migrants from nations it says foster extremist ideologies, deport any visa holder who breaks the law, and introduce an eight-year wait for citizenship and welfare access.', s:O+'immigration'},
+    nat:{v:-2,  t:'Would make Australian values a binding condition on every visa, refuse entry to extremists and radicals with tougher vetting, and deport people who overstay illegally or breach visa conditions.', s:NAT+'nationals-policies/cutting-immigration/'}
+  }
+},
+{
+  id:'health', title:'Health and Medicare', domain:'Health & care',
+  axis:['More private and targeted','More universal public coverage'],
+  p:{
+    grn:{v:2,  t:'Extend Medicare so GP visits are free, and add dental and mental health care. Would fund $400 million in grants for community mental health organisations, legislate a National Suicide Prevention Act with $180 million behind it, and open 11 more supervised injecting facilities.', s:G+'portfolios/health-mental-health'},
+    alp:{v:2,  t:'Urgent Care Clinics made a permanent part of Medicare, the largest bulk-billing increase, record public hospital investment and more medicines on the PBS.', n:'Drawn from the cost-of-living page. Labor\u2019s dedicated Medicare and aged care page returns a fetch error, so aged care is likely under-represented here.', s:A+'our-policies/help-with-the-cost-of-living/'},
+    lib:{v:0,  t:'Says it will focus on whole-of-life health and give families choice, with detailed policy still being developed.', s:L+'our-plan'},
+    onp:{v:1,  t:'Wants mandatory photo ID on Medicare cards and increased GP rebates, citing up to $3 billion lost annually to Medicare fraud. A separate page says it would pay off HECS-HELP debts in full for newly qualified medical staff who take three-year regional contracts.', s:O+'rorts'},
+    nat:{v:1,  t:'Highlights an $8.35 billion yearly gap in regional health spending, and would fund more rural doctor training places, restore Distribution Priority Areas directing international doctors to under-served regions, and lift Medicare rebates for Nurse Practitioners after two years of supervised practice.', s:NAT+'nationals-policies/regional-health/'}
+  }
+},
+{
+  id:'education', title:'Schools, TAFE and student debt', domain:'Education',
+  axis:['Standards, basics and trades','Funding, access and debt relief'],
+  p:{
+    grn:{v:2,  t:'Wipe all student debt, restore free university and TAFE, fully fund public schools so they are genuinely free, and add free school lunches.', s:G+'portfolios/tertiary-education'},
+    alp:{v:2,  t:'Free TAFE made permanent, student debt cut by 20 per cent, paid placements for student teachers, nurses, midwives and social workers, every school fully funded, and $10,000 for construction apprentices.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:-1, t:'Get the basics right — reading, writing, maths and attendance — be honest about how children are performing, and back trades and training rather than treating university as the default.', s:L+'our-plan'},
+    onp:{v:-1, t:'Says outcomes trail comparable countries despite a $24.8 billion budget, and would restore critical thinking and what it calls the cornerstones of education.', s:O+'education'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'childcare', title:'Childcare and parents', domain:'Health & care',
+  axis:['Support the household to choose','Subsidise a universal service'],
+  p:{
+    grn:{v:2,  t:'Would invest over $9 billion a year for 50 hours a week of free early learning and care for every child, extend free preschool to 30 hours a week for three and four-year-olds, and replace the Child Care Subsidy with a public model, phasing out for-profit providers.', s:G+'portfolios/early-childhood-education'},
+    alp:{v:2,  t:'Three days of subsidised care guaranteed, new centres built not for profit, six months of paid parental leave with superannuation attached.', s:A+'our-policies/help-with-the-cost-of-living/'},
+    lib:{v:-1, t:'Back what suits each family rather than one type of childcare, on the view that families know what works for them.', s:L+'our-plan'},
+    onp:{v:-2, t:'Joint tax filing for couples with a dependent child, which it says encourages parents to care for their own children, cuts government childcare costs and supports home schooling.', s:O+'famly-tax-policy'},
+    nat:{v:-1,  t:'Says billions are spent on childcare subsidies that don\u2019t reach regional families, creating what it calls \u2018childcare deserts\u2019, and wants flexible models that work for farming families and shift workers rather than a one-size, city-based system.', s:NAT+'nationals-policies/regional-services/'}
+  }
+},
+{
+  id:'work', title:'Work, wages and unions', domain:'Work',
+  axis:['Employer flexibility and productivity','Worker protections and higher pay'],
+  p:{
+    grn:{v:2,  t:'Would fund a $10 million-a-year National Institute for the Four-Day Work Week and run a trial on the 100:80:100 model, extend pro-rata sick and carer\u2019s leave to casual workers, and include under-18 workers in compulsory superannuation.', s:G+'portfolios/jobs-employment'},
+    alp:{v:2,  t:'Says the minimum wage has risen by more than $9,000 a year since 2022, backs another real rise, and is scrapping junior pay rates in retail, fast food and pharmacy.', s:A+'our-policies/help-with-the-cost-of-living/'},
+    lib:{v:-2, t:'Says workplace regulators are hurting productivity, and would oblige regulators by law to encourage competition, investment and job creation. Has introduced legislation to expel the worst offenders from the CFMEU.', s:L+'our-plan/tax'},
+    onp:{v:0,  t:'Backs jobs for Australians first and would expand the national apprenticeship scheme, with wage subsidies of 75% in the first year, 50% in the second and 25% in the third.', s:O+'jobs'},
+    nat:{v:null,t:'Not covered on the pages read so far.', n:'The clearest published stance on unions is narrow \u2014 removing CFMEU influence from Commonwealth-funded infrastructure projects, citing union-related costs inflating delivery by up to 30%. That\u2019s a real position, but it doesn\u2019t speak to general wages, junior rates or bargaining policy the way this topic tracks.', s:NAT}
+  }
+},
+{
+  id:'govsize', title:'Size of government', domain:'Economy & tax',
+  axis:['Cut spending and shrink the state','Expand public provision'],
+  p:{
+    grn:{v:2,  t:'Expand public services and public ownership, funded by taxing corporations and billionaires, on the view the economy should serve everyone.', s:G+'policies/economic-justice'},
+    alp:{v:1,  t:'Continues large public investment while saying the 2026 Budget has lower deficits and less debt, the economy is growing and unemployment is low.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:-2, t:'A speed limit stopping government spending growing faster than the economy, a restored tax-to-GDP cap, a revitalised Charter of Budget Honesty, and a Future Generations Fund banking 80 cents of every dollar of unexpected resource windfall to pay down debt, with a quarter of its infrastructure flows going to the regions.', s:L+'our-plan/australians'},
+    onp:{v:-2, t:'A $90 billion budget savings plan cutting departments, reforming the NDIS, withdrawing from costly international agreements and removing duplication.', s:O+'slash-waste'},
+    nat:{v:null,t:'Not covered on the pages read so far.', n:'All 20 of the site\u2019s policy pages have now been checked; none addresses this specifically.', s:NAT}
+  }
+},
+{
+  id:'environment', title:'Nature and environmental law', domain:'Environment',
+  axis:['Unlock land and resources','Protect and restore ecosystems'],
+  p:{
+    grn:{v:2,  t:'Would establish a $5 billion Protected Areas Fund, put $20 billion into biodiversity restoration over a decade, create a Land and Sea Country Commissioner, and spend $1.5 billion strengthening environmental laws including a national EPA.', s:G+'portfolios/environment'},
+    alp:{v:1,  t:'Says it has rewritten environment laws it describes as broken and established a national Environment Protection Agency.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:-2, t:'Rebalance environmental laws so they unlock rather than lock up resources, and simplify approvals to fast-track major projects, arguing activists are using the laws to block development.', s:L+'our-plan/energy'},
+    onp:{v:-1, t:'Wants timber self-sufficiency through expanded forestry plantations, a \u2018local wood first\u2019 government procurement policy, and a five-year GST exemption on building materials, saying forestry contributes $24 billion and 80,000 direct jobs to the economy.', s:O+'forestry'},
+    nat:{v:-2,  t:'Wants practical, farmer-led environmental management rather than top-down regulation \u2014 more funding for invasive species control, citing $25 billion in lost agricultural production a year, reversing Labor\u2019s EPBC changes, and ending Commonwealth funding for the Environmental Defenders Office.', s:NAT+'nationals-policies/invasive-species/'}
+  }
+},
+{
+  id:'firstnations', title:'First Nations', domain:'Democracy & rights',
+  axis:['No structural change proposed','Truth, treaty and self-determination'],
+  p:{
+    grn:{v:2,  t:'Says First Nations people never ceded sovereignty. Wants a National Truth and Justice Commission, reform of the Native Title Act around free, prior and informed consent, a federal Act protecting cultural heritage, and full implementation of UNDRIP into federal law.', s:G+'portfolios/first-nations'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
+    onp:{v:null,t:'Not covered on the pages read so far.', s:O+'issues'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'foreign', title:'Defence and foreign policy', domain:'Foreign & defence',
+  axis:['Alliances and military build-up','Diplomacy, peace and non-alignment'],
+  p:{
+    grn:{v:2,  t:'Wants to cancel AUKUS and renegotiate ANZUS, pass War Powers legislation requiring parliamentary approval before combat deployments, and sign the Treaty on the Prohibition of Nuclear Weapons. Calls for an end to the occupation of Palestine and a stop to Australian military exports to Israel.', s:G+'portfolios/foreign-affairs'},
+    alp:{v:-1, t:'Record defence investment alongside trade-building, with free trade agreements secured with the EU and UK and Australian produce returned to China. Says one in four jobs depends on trade.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:-2, t:'Build a defence force that can act fast and hit hard, deliver AUKUS, guard the borders, and keep streets safe from crime, terror and foreign threats. Commits to a whole-of-nation National Security Strategy with a dedicated adviser, and at least 3 per cent of GDP on defence.', s:L+'our-plan/australians'},
+    onp:{v:null,t:'No standalone defence or foreign policy on these pages, though the savings plan includes withdrawing from costly international agreements.', s:O+'slash-waste'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'democracy', title:'Democracy and integrity', domain:'Democracy & rights',
+  axis:['Work within current institutions','Change how decisions are made'],
+  p:{
+    grn:{v:2,  t:'Would ban political donations from industries including banking, mining, defence and gambling, require disclosure of contributions over $1,000, extend the ban on former ministers lobbying from 18 months to five years, and legislate truth in political advertising with enforceable penalties.', s:G+'portfolios/democracy'},
+    alp:{v:1,  t:'Delivered the National Anti-Corruption Commission, filling what it says was a gap at the federal level, alongside other integrity reforms.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
+    onp:{v:2,  t:'Introduce Citizen Initiated Referenda so voters can put forward legislation or a referendum question without waiting for politicians.', s:O+'citizen-initiated-referenda'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'speech', title:'Speech and civil liberties', domain:'Democracy & rights',
+  axis:['Accept regulation of speech and platforms','Constrain government limits on speech'],
+  p:{
+    grn:{v:2,  t:'Treats digital rights, privacy and a free, diverse press as core, and wants an end to the criminalisation and suppression of non-violent protest through legislated restrictions, violent policing and pre-emptive arrests, plus a stronger public interest defence for whistleblowers.', s:G+'policies/justice'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
+    onp:{v:2,  t:'Enshrine free speech in the Constitution through a referendum, and oppose censorship, speech regulation and what it calls bureaucratic silencing.', s:O+'free-speech-policy'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'welfare', title:'Social security', domain:'Health & care',
+  axis:['Work-first and tighter targeting','Unconditional adequate income'],
+  p:{
+    grn:{v:2,  t:'Would raise all income support payments above the poverty line, lower the pension age from 67 to 65, and lower JobSeeker eligibility from 22 to 18, giving an extra 200,000 young people access to support.', s:G+'portfolios/social-services'},
+    alp:{v:1, t:'Says it has expanded the single parenting payment, and is fighting NDIS fraud so more of the scheme\u2019s funding reaches people with disability. No broader statement on JobSeeker or the pension was found on the pages read.', s:'https://alp.org.au/our-plan/albanese-labor-government-achievements'},
+    lib:{v:-2, t:'Reward those who work and try, and let people earn more before payments taper, on the view that work is the best way out of hardship. Would also reserve future access to 17 welfare programs and the NDIS to Australian citizens only.', s:L+'our-plan/australians'},
+    onp:{v:null,t:'Not covered on the pages read so far.', n:'This cell previously cited the /rorts page, but on fetching it directly that page is specifically about Medicare fraud and photo ID, not general welfare or the NDIS \u2014 that content now sits under health instead. No genuine One Nation page on income support or Centrelink policy has been found yet.', s:O},
+    nat:{v:null,t:'Not covered on the pages read so far.', n:'Checked the regional-services page directly \u2014 its social-security content is specifically about NDIS fraud and provider standards, not JobSeeker, the pension, or income-support levels, which is what this topic tracks.', s:NAT}
+  }
+},
+{
+  id:'crimjustice', title:'Criminal justice and policing', domain:'Democracy & rights',
+  axis:['Punishment and deterrence','Prevention and rehabilitation'],
+  p:{
+    grn:{v:2,  t:'Restorative justice and alternatives to prison, raising the age of criminal responsibility to at least 14, repealing mandatory sentencing, ending the over-representation of First Nations and disabled people in the system, decriminalising adult sex work, health professionals rather than police as first responders, and stronger public interest protection for whistleblowers.', s:G+'policies/justice'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:-2, t:'Keep streets safe from crime, terror and foreign threats as part of its first duty of keeping people safe, supported by a whole-of-nation National Security Strategy.', s:L+'our-plan/australians'},
+    onp:{v:-2, t:'Tougher sentencing for gun crime and traffickers, stricter border security, and positive identification of recipients to stop what it calls rorting of health and welfare systems.', s:O+'firearms'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'drugs', title:'Drug policy', domain:'Health & care',
+  axis:['Prohibition','Legalisation and harm reduction'],
+  p:{
+    grn:{v:2,  t:'Says the war on drugs has failed and puts people into the justice system over minor cannabis use. Would create a Cannabis Australia National Agency to license growers and retailers, generating an estimated $700 million a year in federal revenue, and bar big tobacco, alcohol and pharmaceutical companies from the market.', s:G+'portfolios/justice'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
+    onp:{v:1,  t:'Push to lower the cost of whole-plant medicinal cannabis for chronic pain and other serious symptoms. Broader legalisation is not proposed.', s:O+'cannabis'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'abortion', title:'Abortion', domain:'Democracy & rights',
+  axis:['Restrict access','Guarantee access'],
+  p:{
+    grn:{v:2,  t:'Ensure abortion access as part of women\u2019s equality, and treats bodily autonomy as a right.', s:G+'portfolios/women'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
+    onp:{v:-2, t:'States that human life begins in the womb and would seek every opportunity to roll back what it calls extreme abortion laws, including reducing gestational limits, banning sex-selective abortion, and reinstating doctors\u2019 right to conscientious objection.', s:O+'pro-life'},
+    nat:{v:null,t:'The nationalsplan.org.au site has a dedicated policy page here, but it hasn\u2019t been fetched and read yet \u2014 this is a gap in reading, not a sign the party has no view.', s:NAT}
+  }
+},
+{
+  id:'firearms', title:'Firearms', domain:'Democracy & rights',
+  axis:['Tighter restrictions','Preserve current access'],
+  p:{
+    grn:{v:-2,t:'Wants gun law reform including a prohibition on possessing and using semi-automatic handguns in the community, and a high degree of oversight, regulation and limits on police use of firearms and tasers.', s:G+'policies/justice'},
+    alp:{v:-2, t:'Announced a National Gun Buyback Scheme in the wake of the December 2025 Bondi Beach attack, described as the largest since the Howard Government in 1996. Would limit how many firearms one person can hold, require citizenship for a licence, and stand up a National Firearms Register.', s:'https://alp.org.au/news/albanese-labor-government-will-establish-a-national-gun-buyback-scheme'},
+    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
+    onp:{v:2,  t:'Opposes firearm reclassification, ownership caps and government-funded buyback schemes, and would repeal the gun laws passed after the Bondi attack, which it says punish compliant licence holders instead of fixing security and policing failures.', s:O+'firearms'},
+    nat:{v:2,  t:'Opposes the Albanese Government\u2019s gun buyback and would repeal what it calls unfair federal gun laws passed after the Bondi attack, including import restrictions and a suppressor ban, while backing tougher action on illegal trafficking and criminal misuse.', s:NAT+'nationals-policies/firearms/'}
+  }
+},
+{
+  id:'foreignown', title:'Foreign ownership of land and assets', domain:'Economy & tax',
+  axis:['Open to foreign investment','Restrict foreign ownership'],
+  p:{
+    grn:{v:1,t:'Wants the Foreign Investment Review Board to rigorously regulate, monitor and report on all foreign acquisition and ownership of agricultural land, so it does not harm Australian agriculture or food security. Treats prime farmland and water as vital national assets.', s:G+'policies/agriculture'},
+    alp:{v:1, t:'Extended the two-year ban on foreign purchases of established homes by a further two years and three months, to 30 June 2029, and says it is cracking down on foreign land banking.', s:'https://alp.org.au/our-plan/albanese-labor-government-achievements'},
+    lib:{v:null,t:'Not covered on the pages read so far.', s:L+'our-plan'},
+    onp:{v:2,  t:'Ban further freehold farmland sales to foreign investors, cap leasehold at 25 years, put essential services off-limits, and stop property sales to non-residents.', s:O+'foreign-ownership'},
+    nat:{v:null,t:'Not covered on the pages read so far.', n:'All 20 of the site\u2019s policy pages have now been checked; none addresses this specifically.', s:NAT}
+  }
+},
+{
+  id:'manufacturing', title:'Industry and manufacturing', domain:'Economy & tax',
+  axis:['Let markets allocate','Direct government role in industry'],
+  p:{
+    grn:{v:2,  t:'Government should play a central role in promoting, coordinating and developing a diverse and sustainable industrial base.', s:G+'policies/industry-and-manufacturing'},
+    alp:{v:2,  t:'A National Reconstruction Fund investing in local manufacturing, securing Australian steel and aluminium, and building clean energy technology such as solar panels and wind turbines here.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:-2, t:'Back risk-takers and clear the path for the private sector, with a permanent instant asset write-off, simpler laws and regulators legally obliged to nurture investment.', s:L+'our-plan/tax'},
+    onp:{v:1,  t:'Restore local production and prioritise Australians, expand forestry and fisheries, and take a direct ownership stake in oil and gas through a Commonwealth investment vehicle.', s:O+'oil-and-gas'},
+    nat:{v:2,  t:'Wants government buying rules that put Australian-made first, long-term finance and stronger investment incentives for manufacturers, and countervailing tariffs plus reformed anti-dumping rules when foreign subsidies distort markets. Says manufacturing jobs have fallen from almost 1.2 million in the 1990s to under 900,000 today.', s:NAT+'nationals-policies/manufacturing/'}
+  }
+},
+{
+  id:'fuelsec', title:'Fuel and resource security', domain:'Energy & climate',
+  axis:['No specific reserve policy','Build sovereign reserves'],
+  p:{
+    grn:{v:null,t:'Not covered on the pages read so far.', s:G+'platform'},
+    alp:{v:1,  t:'Buying more fuel and fertiliser now, growing jet fuel and diesel reserves to 50 days, and asking gas companies to reserve 20 per cent of exports for Australia.', s:A+'our-policies/building-australias-future/'},
+    lib:{v:2,  t:'Double critical fuel reserves to 60 days, back more than a billion litres of new storage through an $800 million facility, support new refineries and alternative fuels, and publish a daily fuel dashboard.', s:L+'our-plan/energy'},
+    onp:{v:2,  t:'Secure fuel supplies with 90-day onshore reserves as part of an oil and gas joint venture giving Australians direct ownership of the resource.', s:O+'oil-and-gas'},
+    nat:{v:null,t:'Not covered on the pages read so far.', n:'Checked the resources-and-mining page directly \u2014 it covers mine and gas project approvals, exploration incentives and designating uranium a critical mineral, but says nothing about fuel storage reserves specifically, which is what this topic tracks.', s:NAT}
+  }
+},
+{
+  id:'agriculture', title:'Agriculture and the food system', domain:'Environment',
+  axis:['Support production and market access','Reshape the food system'],
+  p:{
+    grn:{v:2,  t:'A national strategy built on agro-ecology, help for farmers to move to regenerative practice, an end to broad-scale native vegetation clearing, competition reform to break up concentrated ownership of food production and retail, and a publicly owned supermarket and food distribution network to give producers stable returns.', s:G+'policies/agriculture'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:-1, t:'Back the regional industries that fuel, feed and power the nation with better roads, services and connectivity, protect the Murray\u2013Darling Basin, and end water buybacks. A $20 billion Regional Australia Future Fund.', s:L+'our-plan'},
+    onp:{v:-1, t:'Ban further freehold farmland sales to foreign investors, cap leasehold sales at 25 years, restore Foreign Investment Review Board scrutiny of agricultural land under expiring free trade agreements, and re-establish a federally backed rural lending fund for drought and other events.', s:O+'farming'},
+    nat:{v:-2,  t:'Treats farming as a national asset and food security as national security, wants divestiture-style competition reform so farmers aren\u2019t stuck selling to two big supermarkets, and would protect farmland in land-use decisions including through food security tests. Backs sustainable forestry and fishing managed by industry rather than distant regulators.', s:NAT+'nationals-policies/feeding-our-nation/'}
+  }
+},
+{
+  id:'water', title:'Water and farming', domain:'Environment',
+  axis:['Build supply for agriculture','Manage water for ecosystems'],
+  p:{
+    grn:{v:2,  t:'Treats water as a common good and clean water as a human right, to be managed sustainably for environmental, cultural and social needs. Wants a permanent ban on new large-scale dams on Australian rivers.', s:G+'policies/water-and-inland-aquatic-environments'},
+    alp:{v:null,t:'Not covered on the pages read so far.', s:A+'our-plan/what-were-working-on/'},
+    lib:{v:-2, t:'Protect the Murray\u2013Darling Basin while ending water buybacks it says strip water from farms and towns, backed by a $20 billion Regional Australia Future Fund.', s:L+'our-plan'},
+    onp:{v:-2, t:'Build new dams and water infrastructure to increase supply to farmers, require full disclosure of water ownership, and ban sales of water to foreign investors.', s:O+'water'},
+    nat:{v:-2,  t:'Would end further water buybacks and cuts to water for farming and towns, lift the water set aside for farmers and businesses, and reform the Commonwealth Environmental Water Holder to return spare water to the consumptive pool at lower cost.', s:NAT+'nationals-policies/water/'}
+  }
+}
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  view:'matrix',
+  q:'',
+  domains:new Set(),
+  parties:new Set(PARTIES.map(p=>p.id))
+};
+
+const DOMAINS = [...new Set(TOPICS.map(t=>t.domain))].sort();
+const byId = id => PARTIES.find(p=>p.id===id);
+const activeParties = () => PARTIES.filter(p=>state.parties.has(p.id));
+
+function visibleTopics(){
+  const q = state.q.trim().toLowerCase();
+  return TOPICS.filter(t=>{
+    if(state.domains.size && !state.domains.has(t.domain)) return false;
+    if(!q) return true;
+    const hay = [t.title,t.domain,t.axis.join(' '),
+      ...PARTIES.map(p=>t.p[p.id].t)].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+function buildChips(){
+  const dwrap = document.getElementById('domainchips');
+  DOMAINS.forEach(d=>{
+    const b = document.createElement('button');
+    b.className='chip'; b.textContent=d; b.setAttribute('aria-pressed','false');
+    b.dataset.domain = d;
+    b.onclick=()=>{
+      if(state.view==='quad'){
+        // Quadrant view: only one Area at a time, since each domain maps to
+        // exactly one hand-built quadrant. Clicking the active one clears
+        // back to the Overall view; clicking another replaces the selection.
+        if(state.domains.has(d) && state.domains.size===1) state.domains.clear();
+        else { state.domains.clear(); state.domains.add(d); }
+      } else {
+        state.domains.has(d) ? state.domains.delete(d) : state.domains.add(d);
+      }
+      syncDomainChips();
+      render();
+    };
+    dwrap.appendChild(b);
+  });
+
+  const pwrap = document.getElementById('partychips');
+  const cnt = document.getElementById('count');
+  PARTIES.forEach(p=>{
+    const b = document.createElement('button');
+    b.className='chip partychip';
+    b.innerHTML = '<span class="key" style="background:'+p.colour+'"></span>'+p.name;
+    b.setAttribute('aria-pressed','true');
+    b.style.background = p.colour; b.style.borderColor = p.colour;
+    b.onclick=()=>{
+      if(state.parties.has(p.id)){
+        if(state.parties.size===1) return;
+        state.parties.delete(p.id);
+        b.style.background='transparent'; b.style.borderColor='var(--rule-strong)';
+      } else {
+        state.parties.add(p.id);
+        b.style.background=p.colour; b.style.borderColor=p.colour;
+      }
+      b.setAttribute('aria-pressed', state.parties.has(p.id));
+      render();
+    };
+    pwrap.insertBefore(b, cnt);
+  });
+}
+
+document.getElementById('q').addEventListener('input', e=>{ state.q=e.target.value; render(); });
+['matrix','map','agree','quad'].forEach(v=>{
+  document.getElementById('tab-'+v).onclick=()=>{
+    state.view=v;
+    ['matrix','map','agree','quad'].forEach(x=>
+      document.getElementById('tab-'+x).setAttribute('aria-pressed', x===v));
+    if(v==='quad' && state.domains.size>1) state.domains.clear(); // quad allows at most one Area
+    syncDomainChips();
+    render();
+  };
+});
+
+function syncDomainChips(){
+  document.querySelectorAll('#domainchips .chip').forEach(b=>{
+    b.setAttribute('aria-pressed', state.domains.has(b.dataset.domain));
+  });
+}
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+function trackHTML(v, colour){
+  if(v===null) return '<span class="track"><span class="na">not covered</span></span>';
+  let out='<span class="track">';
+  for(let i=-2;i<=2;i++){
+    out += i===v ? '<i class="on" style="background:'+colour+'"></i>' : '<i></i>';
+  }
+  return out+'</span>';
+}
+
+function escapeHTML(str){
+  return String(str).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+}
+function highlight(text, q){
+  const safe = escapeHTML(text);
+  if(!q) return safe;
+  const esc = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return safe.replace(new RegExp('('+esc+')','gi'), '<mark class="hl">$1</mark>');
+}
+
+function shortSrc(url){
+  return escapeHTML(String(url).replace(/^https?:\/\//,'').replace(/^www\./,''));
+}
+
+function renderMatrix(list){
+  const ps = activeParties();
+  const q = state.q.trim();
+  const grid = document.createElement('div');
+  grid.className='mgrid';
+  grid.style.gridTemplateColumns = '120px repeat('+ps.length+', minmax(189px,1fr))';
+
+  const h0 = document.createElement('div');
+  h0.className='mhead'; h0.textContent='Topic';
+  grid.appendChild(h0);
+  ps.forEach(p=>{
+    const h = document.createElement('div');
+    h.className='mhead party';
+    h.style.borderBottomColor = p.colour;
+    h.innerHTML = '<span class="pname" style="color:'+p.colour+'">'+p.full+'</span><span class="pmeta">'+p.site+'</span>';
+    grid.appendChild(h);
+  });
+
+  list.forEach(t=>{
+    const tc = document.createElement('div');
+    tc.className='topiccell';
+    tc.innerHTML = '<h3>'+highlight(t.title,q)+'</h3><div class="dom">'+highlight(t.domain,q)+'</div>'+
+      '<div class="axis">'+highlight(t.axis[0],q)+' &nbsp;→&nbsp; '+highlight(t.axis[1],q)+'</div>';
+    grid.appendChild(tc);
+
+    ps.forEach(p=>{
+      const d = t.p[p.id];
+      const c = document.createElement('div');
+      c.className='cell'+(d.v===null?' silent':'');
+      c.dataset.party = p.full;
+      c.style.setProperty('--pc', p.colour);
+      c.tabIndex = 0;
+      c.setAttribute('role','button');
+      c.setAttribute('aria-label', p.full+': '+t.title+' \u2014 open detail');
+      c.innerHTML = trackHTML(d.v,p.colour)+'<p>'+highlight(d.t,q)+'</p>'+
+                    (d.n ? '<p class="flag">'+highlight(d.n,q)+'</p>' : '')+
+                    '<a class="srclink" href="'+d.s+'" target="_blank" rel="noopener">'+shortSrc(d.s)+' \u2197</a>';
+      c.onclick=()=>openDrawer(t,p);
+      c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openDrawer(t,p); } };
+      c.querySelector('.srclink').addEventListener('click', e=>{
+        e.stopPropagation();
+        e.preventDefault();
+        const win = window.open(d.s, '_blank', 'noopener');
+        if(!win) window.location.href = d.s;
+      });
+      grid.appendChild(c);
+    });
+  });
+
+  const box = document.createElement('div');
+  box.className='matrix'; box.appendChild(grid);
+  return box;
+}
+
+function renderMap(list){
+  const ps = activeParties();
+  const q = state.q.trim();
+  const box = document.createElement('div');
+  box.className='map';
+
+  list.forEach(t=>{
+    const row = document.createElement('div');
+    row.className='maprow';
+    row.innerHTML = '<div><h3>'+highlight(t.title,q)+'</h3><div class="dom">'+highlight(t.domain,q)+'</div></div>';
+
+    const scale = document.createElement('div');
+    scale.className='scale';
+
+    // axis labels live above the track, so a long label can never sit under the rule
+    const ends = document.createElement('div');
+    ends.className='ends';
+    ends.innerHTML = '<span>'+highlight(t.axis[0],q)+'</span><span>'+highlight(t.axis[1],q)+'</span>';
+    scale.appendChild(ends);
+
+    const band = document.createElement('div');
+    band.className='band';
+    let inner = '<div class="line"></div>';
+    for(let i=0;i<5;i++) inner += '<div class="tick" style="left:'+(10+i*20)+'%"></div>';
+
+    // group parties sharing a position, then spread that group symmetrically
+    // about the rule rather than piling downward from it
+    const placed = ps.filter(p=>t.p[p.id].v!==null);
+    const groups = {};
+    placed.forEach(p=>{
+      const v = t.p[p.id].v;
+      (groups[v] = groups[v] || []).push(p);
+    });
+    const CENTRE = 33, GAP = 17, R = 7;
+    Object.keys(groups).forEach(v=>{
+      const g = groups[v];
+      const left = 10 + (Number(v)+2)*20;
+      g.forEach((p,i)=>{
+        const offset = (i - (g.length-1)/2) * GAP;
+        inner += '<div class="dot" style="left:'+left+'%;top:'+(CENTRE-R+offset)+
+                 'px;background:'+p.colour+'" title="'+p.full+'"></div>';
+      });
+    });
+    band.innerHTML = inner;
+    scale.appendChild(band);
+
+    const silent = ps.filter(p=>t.p[p.id].v===null).map(p=>p.name);
+    if(silent.length){
+      const s = document.createElement('div');
+      s.className='silent';
+      s.textContent='Silent on the pages read: '+silent.join(', ');
+      scale.appendChild(s);
+    }
+
+    row.appendChild(scale);
+    box.appendChild(row);
+  });
+
+  const key = document.createElement('div');
+  key.className='mapkey';
+  key.innerHTML = ps.map(p=>'<b><i style="background:'+p.colour+'"></i>'+p.full+'</b>').join('');
+  box.appendChild(key);
+  return box;
+}
+
+function renderAgree(list){
+  const ps = activeParties();
+  const box = document.createElement('div');
+  box.className='agree';
+
+  let html = '<table><thead><tr><th></th>';
+  ps.forEach(p=>{ html += '<th style="color:'+p.colour+'">'+p.name+'</th>'; });
+  html += '</tr></thead><tbody>';
+
+  ps.forEach(a=>{
+    html += '<tr><td class="rowlab"><span class="pk" style="background:'+a.colour+'"></span>'+a.name+'</td>';
+    ps.forEach(b=>{
+      if(a.id===b.id){ html += '<td class="self"></td>'; return; }
+      let both=0, close=0;
+      list.forEach(t=>{
+        const x=t.p[a.id].v, y=t.p[b.id].v;
+        if(x===null||y===null) return;
+        both++;
+        if(Math.abs(x-y)<=1) close++;
+      });
+      const pct = both ? Math.round(close/both*100) : null;
+      const shade = pct===null ? 0 : pct/100*0.16;
+      html += '<td style="background:rgba(20,22,26,'+shade.toFixed(3)+')">'+
+              (pct===null ? '<b>—</b><small>no shared topics</small>'
+                          : '<b>'+pct+'%</b><small>'+close+' of '+both+' shared topics</small>')+'</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  box.innerHTML = html;
+  return box;
+}
+
+/* ============================================================
+   DRAWER
+   ============================================================ */
+const drawer = document.getElementById('drawer');
+const scrim  = document.getElementById('scrim');
+let lastFocus = null;
+
+function openDrawer(t,p){
+  lastFocus = document.activeElement;
+  const d = t.p[p.id];
+  document.getElementById('drawer-kicker').innerHTML =
+    '<i style="background:'+p.colour+'"></i><span style="color:'+p.colour+'">'+p.full+'</span>';
+  document.getElementById('drawer-title').textContent = t.title;
+  document.getElementById('drawer-dom').textContent = t.domain;
+  document.getElementById('drawer-body').textContent = d.t;
+
+  const fl = document.getElementById('drawer-flag');
+  fl.textContent = d.n || '';
+  fl.style.display = d.n ? 'block' : 'none';
+
+  const pl = document.getElementById('drawer-placement');
+  if(d.v===null){
+    pl.innerHTML = '<span>Placement on the scale</span>None. This topic is not addressed on the pages listed for this party, which is not the same as the party having no view.';
+  } else {
+    const words = ['strongly toward','toward','between','toward','strongly toward'];
+    const side  = d.v<0 ? t.axis[0] : d.v>0 ? t.axis[1] : t.axis.join(' and ');
+    pl.innerHTML = '<span>Placement on the scale</span>'+trackHTML(d.v,p.colour)+
+      '<div style="margin-top:10px;font-family:var(--serif);font-size:14px">Coded '+
+      words[d.v+2]+' <em>'+side.toLowerCase()+'</em>, based on the wording above.</div>';
+  }
+
+  const a = document.getElementById('drawer-src');
+  a.href = d.s; a.textContent = 'Read the source page \u2192';
+  drawer.dataset.open='true'; scrim.dataset.open='true';
+  drawer.focus();
+}
+function closeDrawer(){
+  drawer.dataset.open='false'; scrim.dataset.open='false';
+  if(lastFocus) lastFocus.focus();
+}
+document.getElementById('drawer-close').onclick = closeDrawer;
+scrim.onclick = closeDrawer;
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
+/* ============================================================
+   QUADRANT AXES
+   A fixed, hand-authored set of 11 quadrants: one "Overall" view
+   spanning all 30 topics, plus one per Area domain. There is no
+   live generation and no manual editing — this all runs offline,
+   with no Claude account or network call needed. Selecting exactly
+   one Area chip above switches to that domain's quadrant; zero or
+   multiple domains selected shows Overall. A search filter further
+   narrows which of that quadrant's topics actually score, without
+   changing the axis definitions themselves.
+
+   Three domains — Education, Work, and Foreign & defence — have
+   only one tracked topic each, so a genuine two-axis quadrant
+   isn't possible from that domain's data alone. Those three are
+   marked "single" and rendered as a one-dimensional line instead
+   of a fake scatter.
+   ============================================================ */
+const QUADRANTS = {
+  overall:{
+    x:{ low:'Conservative', high:'Progressive',
+        topics:{ firstnations:1, crimjustice:1, drugs:1, abortion:1, borders:1, migration:1, firearms:-1 } },
+    y:{ low:'Private', high:'Public',
+        topics:{ govsize:1, bigtax:1, supply:1, renters:1, health:1, childcare:1,
+                 education:1, work:1, welfare:1, manufacturing:1, col:1 } }
+  },
+  'Energy & climate':{
+    x:{ low:'Fossil fuel focused', high:'Climate action focused', topics:{ climate:1, energy:1 } },
+    y:{ low:'No nuclear, no reserves', high:'Nuclear power and sovereign reserves', topics:{ nuclear:1, fuelsec:1 } }
+  },
+  'Economy & tax':{
+    x:{ low:'Market-led, lower taxes', high:'State-led, higher taxes on capital',
+        topics:{ incometax:-1, bigtax:1, govsize:1, col:1 } },
+    y:{ low:'Open to foreign investment', high:'Protect domestic ownership and industry',
+        topics:{ foreignown:1, manufacturing:1 } }
+  },
+  'Housing':{
+    x:{ low:'Cheaper private building', high:'Government-built housing', topics:{ supply:1 } },
+    y:{ low:'Protect investor settings', high:'Shift settings to renters and buyers', topics:{ renters:1 } }
+  },
+  'Immigration & borders':{
+    x:{ low:'Lower the intake', high:'Maintain or grow the intake', topics:{ migration:1 } },
+    y:{ low:'Enforcement first', high:'Rights of arrivals first', topics:{ borders:1 } }
+  },
+  'Health & care':{
+    x:{ low:'Private and targeted support', high:'Universal public provision',
+        topics:{ health:1, childcare:1, welfare:1 } },
+    y:{ low:'Prohibition', high:'Legalisation and harm reduction', topics:{ drugs:1 } }
+  },
+  'Education':{ single:{ low:'Standards, basics and trades', high:'Funding, access and debt relief', topics:{ education:1 } } },
+  'Work':{ single:{ low:'Employer flexibility and productivity', high:'Worker protections and higher pay', topics:{ work:1 } } },
+  'Environment':{
+    x:{ low:'Unlock resources for production', high:'Protect and restore ecosystems', topics:{ environment:1, water:1 } },
+    y:{ low:'Support production and market access', high:'Reshape the food system', topics:{ agriculture:1 } }
+  },
+  'Democracy & rights':{
+    x:{ low:'No structural reform', high:'Institutional and treaty reform', topics:{ firstnations:1, democracy:1 } },
+    y:{ low:'More restriction of individual choice', high:'Less restriction of individual choice',
+        topics:{ speech:1, firearms:1, abortion:1, crimjustice:1 } }
+  },
+  'Foreign & defence':{ single:{ low:'Alliances and military build-up', high:'Diplomacy, peace and non-alignment', topics:{ foreign:1 } } }
+};
+
+function pickQuadrant(){
+  if(state.domains.size === 1){
+    const d = [...state.domains][0];
+    if(QUADRANTS[d]) return { key:d, cfg:QUADRANTS[d] };
+  }
+  return { key:'overall', cfg:QUADRANTS.overall };
+}
+
+function axisScore(partyId, axis, allowedIds){
+  let sum=0, n=0;
+  Object.keys(axis.topics).forEach(tid=>{
+    const sign = axis.topics[tid];
+    if(!sign) return;
+    if(allowedIds && !allowedIds.has(tid)) return;
+    const t = TOPICS.find(x=>x.id===tid);
+    if(!t) return;
+    const v = t.p[partyId].v;
+    if(v===null) return;
+    sum += sign*v; n++;
+  });
+  return n ? {score:sum/n, n:n} : null;
+}
+
+function axisGap(partyId, axis, allowedIds){
+  const ids = Object.keys(axis.topics).filter(tid=>axis.topics[tid] && (!allowedIds || allowedIds.has(tid)));
+  const names = ids.map(tid=>TOPICS.find(t=>t.id===tid)).filter(Boolean);
+  const covered = names.filter(t=>t.p[partyId].v!==null);
+  return {total:names.length, covered:covered.length, names};
+}
+
+function renderQuad(list){
+  const ps = activeParties();
+  const allowedIds = new Set(list.map(t=>t.id));
+  const { key, cfg } = pickQuadrant();
+  const box = document.createElement('div');
+  box.className='quad';
+
+  const labs = document.createElement('div');
+  labs.className='axisedit';
+  labs.innerHTML = '<p class="axisintro">'+
+    (key==='overall'
+      ? 'Overall view, spanning all 30 tracked topics. Select a single Area filter above for a quadrant built for that area instead.'
+      : 'Built for the '+key+' area. Clear the Area filter above, or select more than one, to return to the Overall view.')
+    +'</p>';
+  box.appendChild(labs);
+
+  if(cfg.single){
+    // --- single-axis fallback for the three one-topic domains ---
+    // Reuses the stance-map's ends/band pattern: labels sit in their own
+    // flex row above the track, so a dot landing near either end can never
+    // sit under the label text, regardless of how long the label is.
+    const ax = cfg.single;
+    const note = document.createElement('p');
+    note.className='axisintro';
+    note.style.color = 'var(--flag)';
+    note.textContent = key+' has only one tracked topic, so there isn\u2019t enough data here for a genuine second axis \u2014 shown as a line rather than a quadrant.';
+    box.appendChild(note);
+
+    const scale = document.createElement('div');
+    scale.className='scale';
+
+    const ends = document.createElement('div');
+    ends.className='ends';
+    ends.innerHTML = '<span>'+ax.low+'</span><span>'+ax.high+'</span>';
+    scale.appendChild(ends);
+
+    const band = document.createElement('div');
+    band.className='band';
+    let inner = '<div class="line"></div>';
+    for(let i=0;i<5;i++) inner += '<div class="tick" style="left:'+(10+i*20)+'%"></div>';
+
+    const placed = ps.map(p=>({p, s:axisScore(p.id, ax, allowedIds)})).filter(x=>x.s);
+    const groups = {};
+    placed.forEach(({p,s})=>{
+      const v = Math.round(s.score);
+      (groups[v] = groups[v] || []).push(p);
+    });
+    const CENTRE = 33, GAP = 17, R = 7;
+    Object.keys(groups).forEach(v=>{
+      const g = groups[v];
+      const left = 10 + (Number(v)+2)*20;
+      g.forEach((p,i)=>{
+        const offset = (i - (g.length-1)/2) * GAP;
+        inner += '<div class="dot" style="left:'+left+'%;top:'+(CENTRE-R+offset)+
+                 'px;background:'+p.colour+'" title="'+p.full+'"></div>';
+      });
+    });
+    band.innerHTML = inner;
+    scale.appendChild(band);
+    box.appendChild(scale);
+
+    const missing = ps.filter(p=>!placed.find(x=>x.p.id===p.id));
+    if(missing.length){
+      const miss = document.createElement('div');
+      miss.className='qmissing';
+      miss.innerHTML = missing.map(p=>
+        '<div><span class="pk" style="background:'+p.colour+'"></span><b>'+p.name+'</b> has no marker \u2014 silent on the one topic this area tracks.</div>'
+      ).join('');
+      box.appendChild(miss);
+    }
+    return box;
+  }
+
+  const AX = cfg;
+
+  const plotwrap = document.createElement('div');
+  plotwrap.className='plotwrap';
+
+  const scores = ps.map(p=>({
+    p:p, x:axisScore(p.id,AX.x,allowedIds), y:axisScore(p.id,AX.y,allowedIds)
+  })).filter(s=>s.x&&s.y);
+
+  if(!scores.length){
+    plotwrap.innerHTML = '<div class="qempty">None of the topics in this selection line up with these axes, so no party can be placed yet. Try clearing the search filter.</div>';
+    box.appendChild(plotwrap);
+  } else {
+    let dots='';
+    scores.forEach((s,i)=>{
+      let left = 50 + (s.x.score/2)*42;
+      let top  = 50 - (s.y.score/2)*42;
+      scores.slice(0,i).forEach(o=>{
+        const ol = 50 + (o.x.score/2)*42, ot = 50 - (o.y.score/2)*42;
+        if(Math.abs(ol-left)<4 && Math.abs(ot-top)<4){ top += 5; }
+      });
+      dots += '<div class="qdot" style="left:'+left+'%;top:'+top+'%;background:'+s.p.colour+'" title="'+s.p.full+'"></div>';
+    });
+
+    plotwrap.innerHTML =
+      '<div class="qlab qtop">'+AX.y.high+'</div>'+
+      '<div class="qlab qbottom">'+AX.y.low+'</div>'+
+      '<div class="qlab qleft"><span>'+AX.x.low+'</span></div>'+
+      '<div class="qlab qright"><span>'+AX.x.high+'</span></div>'+
+      '<div class="plot">'+
+        '<div class="qaxis qv"></div><div class="qaxis qh"></div>'+
+        '<div class="qname q1">'+AX.y.high+' &amp; '+AX.x.low+'</div>'+
+        '<div class="qname q2">'+AX.y.high+' &amp; '+AX.x.high+'</div>'+
+        '<div class="qname q3">'+AX.y.low+' &amp; '+AX.x.low+'</div>'+
+        '<div class="qname q4">'+AX.y.low+' &amp; '+AX.x.high+'</div>'+
+        dots+
+      '</div>';
+    box.appendChild(plotwrap);
+
+    const key = document.createElement('div');
+    key.className='mapkey';
+    key.innerHTML = scores.map(s=>'<b><i style="background:'+s.p.colour+'"></i>'+s.p.full+'</b>').join('');
+    box.appendChild(key);
+
+    const read = document.createElement('div');
+    read.className='qreadout';
+    read.innerHTML = scores.map(s=>
+      '<div><span class="pk" style="background:'+s.p.colour+'"></span><b>'+s.p.name+'</b> '+
+      AX.x.low+'\u2013'+AX.x.high+' '+s.x.score.toFixed(2)+' <small>('+s.x.n+' topics)</small>, '+
+      AX.y.low+'\u2013'+AX.y.high+' '+s.y.score.toFixed(2)+' <small>('+s.y.n+' topics)</small></div>'
+    ).join('');
+    box.appendChild(read);
+
+    const missing = ps.filter(p=>!scores.find(s=>s.p.id===p.id));
+    if(missing.length){
+      const miss = document.createElement('div');
+      miss.className='qmissing';
+      miss.innerHTML = missing.map(p=>{
+        const gx = axisGap(p.id,AX.x,allowedIds), gy = axisGap(p.id,AX.y,allowedIds);
+        const bits=[];
+        if(gx.total && gx.covered===0) bits.push('the horizontal axis \u2014 silent on all '+gx.total+' tracked topics ('+gx.names.map(t=>t.title).join(', ')+')');
+        if(gy.total && gy.covered===0) bits.push('the vertical axis \u2014 silent on all '+gy.total+' tracked topics ('+gy.names.map(t=>t.title).join(', ')+')');
+        return '<div><span class="pk" style="background:'+p.colour+'"></span><b>'+p.name+'</b> has no dot: '+(bits.join('; ')||'not enough tracked topics are coded for this party yet')+'.</div>';
+      }).join('');
+      box.appendChild(miss);
+    }
+  }
+
+  return box;
+}
+/* ============================================================
+   COVERAGE — how much of each party's own material has been read
+   ============================================================ */
+const COVERAGE = {
+  grn:{fetched:9, checked:15, unchecked:0, est:48, checkedDate:'2 Sep 2026',
+       notes:'Every currently-cited page has been checked at least once \u2014 9 by full fetch (platform, climate, housing, agriculture, justice, nuclear and uranium, first nations, foreign affairs, democracy), 15 confirmed via detailed search results (the taxthebillionaires page blocks automated fetching outright). Several of the 15 corrected or enriched a cell. The 48 estimate is the Greens\u2019 full principle-and-aims index; most of those topics aren\u2019t built into this tool yet.'},
+  alp:{fetched:6, checked:0, unchecked:0, est:8, checkedDate:'3 Sep 2026',
+       notes:'Plan index, cost of living, housing, building the future, the achievements page, and a 19 Dec 2025 news release on the National Gun Buyback Scheme \u2014 all fetched directly. Health and opportunity pages still return a fetch error and remain unread. First Nations, speech, criminal justice, drugs, abortion, agriculture and water were also searched for a relevant news release; none was found from the party\u2019s own site.'},
+  lib:{fetched:5, checked:0, unchecked:0, est:5, checkedDate:'1 Sep 2026',
+       notes:'Plan index, tax, energy, migration, put Australians first \u2014 all fetched directly.'},
+  onp:{fetched:7, checked:15, unchecked:0, est:29, checkedDate:'2 Sep 2026',
+       notes:'Every currently-cited page has been checked at least once \u2014 7 by full fetch (issues, oil and gas, coal, nuclear, climate, Medicare fraud/\u201Crorts\u201D, immigration), 15 confirmed via detailed search results. This pass found two cells sourced to the wrong page entirely: borders had cited the firearms page, and welfare had cited a page that turned out to be about Medicare fraud; welfare is now marked not covered since no genuine income-support page was found. The 29 estimate allows for a few more issue pages (trade, veterans) not yet built into this tool as topics.'},
+  nat:{fetched:20, checked:0, unchecked:0, est:20, checkedDate:'3 Sep 2026',
+       notes:'All 20 pages on the site\u2019s policy menu have been fetched directly. Four of them \u2014 building the nation, roads and transport, strong and prosperous regions, regional communications \u2014 turned out to be general infrastructure content that doesn\u2019t map to any topic tracked here. The site simply never addresses renters, education, First Nations, foreign policy, democracy, free speech, criminal justice, drugs or abortion \u2014 confirmed absent, not unread.'}
+};
+
+function coverageHTML(){
+  const rows = PARTIES.map(p=>{
+    const c = COVERAGE[p.id];
+    const done = c.fetched + c.checked;
+    const pct = Math.min(100, Math.round(done/c.est*100));
+    const parts = [c.fetched+' fetched'];
+    if(c.checked) parts.push(c.checked+' checked via search');
+    if(c.unchecked) parts.push(c.unchecked+' unchecked');
+    return '<div class="covrow">'+
+      '<div class="covtop"><span class="pk" style="background:'+p.colour+'"></span>'+
+      '<b>'+p.name+'</b><span class="covbar"><i style="width:'+pct+'%;background:'+p.colour+'"></i></span></div>'+
+      '<div class="covnum">'+parts.join(' \u00b7 ')+' of ~'+c.est+'</div>'+
+      '<div class="covnote">Last checked '+c.checkedDate+' \u2014 '+c.notes+'</div></div>';
+  }).join('');
+  return '<h4 style="margin-top:22px">Pages read so far</h4>'+
+    '<div class="coverage">'+rows+'</div>'+
+    '<p style="margin:14px 0 0">\u201CFetched\u201D means the page was retrieved and read in full. \u201CChecked via search\u201D means the page\u2019s actual content was confirmed through detailed search results rather than a full fetch \u2014 real content, not a guess, but a lighter-touch check. \u201CUnchecked\u201D means a cell\u2019s content hasn\u2019t been verified against the live page at all; for those, treat the wording with real caution.</p>'+
+    '<p style="margin:12px 0 0">These dates mark when pages were last actually checked, not when a party last changed them \u2014 nothing here refreshes on its own. Ask, and the relevant pages get re-checked and patched.</p>'+
+    '<p style="margin:12px 0 0">\u201CNot covered\u201D means the pages checked are silent on that topic, not that the party has no view. Where a gap has actually been chased, <span style="color:var(--flag)">a red note in the cell says what was tried and what came back</span>.</p>';
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function render(){
+  const list = visibleTopics();
+  const stage = document.getElementById('stage');
+  stage.innerHTML='';
+
+  document.getElementById('count').textContent =
+    list.length + (list.length===1?' topic':' topics') + ' · ' + activeParties().length + ' parties';
+
+  if(!list.length){
+    const e = document.createElement('div');
+    e.className='empty';
+    e.textContent='Nothing matches that. Clear the search or turn off an area filter to see all '+TOPICS.length+' topics.';
+    stage.appendChild(e);
+  } else if(state.view==='matrix'){
+    stage.appendChild(renderMatrix(list));
+  } else if(state.view==='map'){
+    stage.appendChild(renderMap(list));
+  } else if(state.view==='agree'){
+    stage.appendChild(renderAgree(list));
+  } else {
+    stage.appendChild(renderQuad(list));
+  }
+
+  const m = document.getElementById('method');
+  m.innerHTML = state.view==='quad'
+    ? '<h4>How these quadrants work</h4>There are 11 fixed quadrants, hand-built once rather than generated on the fly: an Overall view spanning all 30 tracked topics, plus one for each of the 10 Area domains. Select exactly one Area filter above to switch to that domain\u2019s quadrant; select none, or more than one, and it falls back to Overall. This runs entirely offline \u2014 no Claude account and no network call needed, which is also why the axes aren\u2019t editable or regenerated per selection the way they briefly were. Education, Work, and Foreign & defence each track only one topic, too little for a genuine second axis, so those show as a line rather than a fabricated scatter. A search filter still narrows which topics actually score within whichever quadrant is showing. Each party\u2019s position is the plain average of its placements across the topics assigned to that axis, so a party with many blank cells on those topics is averaged over fewer of them \u2014 the count under the plot shows how many. Averaging also hides spread: a party sitting near the centre may be genuinely moderate, or split between two extremes.'+coverageHTML()
+    : state.view==='agree'
+    ? '<h4>How overlap is counted</h4>Each pair is scored across the topics where both parties have stated something on their own pages. A topic counts as shared agreement when the two placements sit within one step of each other on that topic\u2019s scale. Topics where either party is silent are excluded, so the denominator changes from pair to pair.'
+    : '<h4>How to read this</h4>The wording in every cell is a summary of what the party publishes about itself, not an assessment of whether the claim holds up. Placements on each five-step scale are a reading of those published commitments, made so the material can be sorted and compared \u2014 open any cell to see the wording a placement rests on and follow the link to the original page.'+
+      coverageHTML();
+}
+
+buildChips();
+render();
+</script>
+</body>
+</html>
