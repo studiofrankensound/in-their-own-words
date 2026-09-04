@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FCFCFA;
+  --paper:#F8F7F4;
   --ink:#14161A;
   --rule:#D6D4CC;
   --rule-strong:#A9A69C;
@@ -189,22 +189,20 @@ mark.hl{background:#FCE87A;color:inherit;padding:0 1px;border-radius:2px}
 .axislabel{font-family:var(--sans);font-size:15px;color:var(--ink);font-weight:500}
 .plotwrap{
   position:relative;max-width:560px;margin:34px auto 0;
-  padding:26px 30px;
+  padding:0;
 }
-.plot{position:relative;aspect-ratio:1;border:1px solid var(--rule)}
+.plot{position:relative;aspect-ratio:1;border:1px solid var(--rule);flex:1 1 auto;min-width:0}
 .qaxis{position:absolute;background:var(--rule-strong)}
 .qaxis.qv{left:50%;top:0;bottom:0;width:1px}
 .qaxis.qh{top:50%;left:0;right:0;height:1px}
-.qname{position:absolute;font-size:11px;color:var(--muted);max-width:44%;line-height:1.3}
-.qname.q1{top:8px;left:9px}
-.qname.q2{top:8px;right:9px;text-align:right}
-.qname.q3{bottom:8px;left:9px}
-.qname.q4{bottom:8px;right:9px;text-align:right}
-.qlab{position:absolute;font-size:13px;font-weight:600;color:var(--ink)}
-.qlab.qtop{top:2px;left:50%;transform:translateX(-50%)}
-.qlab.qbottom{bottom:2px;left:50%;transform:translateX(-50%)}
-.qlab.qleft{left:0;top:50%;transform:translateY(-50%)}
-.qlab.qright{right:0;top:50%;transform:translateY(-50%)}
+.qmid{display:flex;align-items:stretch;gap:8px}
+.qcaps{display:flex;justify-content:space-between;gap:18px;margin:6px 0}
+.qcaps span{font-size:11px;color:var(--muted);line-height:1.3;max-width:46%}
+.qcaps span+span{text-align:right}
+.qlab{font-size:13px;font-weight:600;color:var(--ink);text-align:center;margin:4px 0}
+.qlab.qleft,.qlab.qright{display:flex;align-items:center;flex:0 0 auto;margin:0}
+.qlab.qleft span,.qlab.qright span{display:block;writing-mode:vertical-rl;transform:rotate(180deg)}
+.qlab.qright span{transform:none}
 .qlab.qleft span,.qlab.qright span{display:block;writing-mode:vertical-rl;transform:rotate(180deg)}
 .qlab.qright span{transform:none}
 .qdot{position:absolute;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--paper)}
@@ -223,7 +221,8 @@ mark.hl{background:#FCE87A;color:inherit;padding:0 1px;border-radius:2px}
 .qmissing .pk{display:inline-block;width:9px;height:9px;margin-right:6px}
 .qmissing b{color:var(--ink)}
 @media (max-width:600px){
-  .plotwrap{padding:24px 22px}
+  .qcaps span{font-size:10px;max-width:46%}
+  .qlab{font-size:12px}
 }
 
 /* ---------- shared ---------- */
@@ -1288,17 +1287,19 @@ function renderQuad(list){
 
     plotwrap.innerHTML =
       '<div class="qlab qtop">'+AX.y.high+'</div>'+
-      '<div class="qlab qbottom">'+AX.y.low+'</div>'+
-      '<div class="qlab qleft"><span>'+AX.x.low+'</span></div>'+
-      '<div class="qlab qright"><span>'+AX.x.high+'</span></div>'+
-      '<div class="plot">'+
-        '<div class="qaxis qv"></div><div class="qaxis qh"></div>'+
-        '<div class="qname q1">'+AX.y.high+' &amp; '+AX.x.low+'</div>'+
-        '<div class="qname q2">'+AX.y.high+' &amp; '+AX.x.high+'</div>'+
-        '<div class="qname q3">'+AX.y.low+' &amp; '+AX.x.low+'</div>'+
-        '<div class="qname q4">'+AX.y.low+' &amp; '+AX.x.high+'</div>'+
-        dots+
-      '</div>';
+      '<div class="qcaps"><span>'+AX.y.high+' &amp; '+AX.x.low+'</span>'+
+        '<span>'+AX.y.high+' &amp; '+AX.x.high+'</span></div>'+
+      '<div class="qmid">'+
+        '<div class="qlab qleft"><span>'+AX.x.low+'</span></div>'+
+        '<div class="plot">'+
+          '<div class="qaxis qv"></div><div class="qaxis qh"></div>'+
+          dots+
+        '</div>'+
+        '<div class="qlab qright"><span>'+AX.x.high+'</span></div>'+
+      '</div>'+
+      '<div class="qcaps"><span>'+AX.y.low+' &amp; '+AX.x.low+'</span>'+
+        '<span>'+AX.y.low+' &amp; '+AX.x.high+'</span></div>'+
+      '<div class="qlab qbottom">'+AX.y.low+'</div>';
     box.appendChild(plotwrap);
 
     const key = document.createElement('div');
